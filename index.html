@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>SCiL23: Adjective Ordering</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+		<style>
+			.sc {
+  				font-variant: small-caps;
+			}	
+			.earl {
+				color: #9da832;
+			}
+			.hear {
+				color: #A72977;
+			}
+			.container{
+    			display: flex;
+			}
+			.col{
+				flex: 1;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section  data-background-color="#f2f0eb">
+					<h2 class="r-fit-text">An incremental RSA model</h1>
+					<h2 class="r-fit-text">for adjective ordering preferences</h1><br/>	
+					Fabian Schlotterbeck &amp; Hening Wang<br/>
+					<!-- University of Tübingen -->
+					<img data-src="UT_WBMW_Rot_RGB_01.png" height="150" />
+					<br/><br/>
+					
+					<b>Poster at SCiL 2023</b><br/>
+					Amherst, 16 June 2023<br/>
+				</section>
+				<section>
+					<h1>Introduction</h1>
+				</section>
+				<section>
+					<h2 class="r-fit-text">Adjective ordering preferences</h2>
+					<ol>
+						<li>
+							<ol>
+								<li type="a"><b>big white bear</b></li>
+								<li type="a"><font color="#A1A1A1">white big bear</font></li>
+							</ol>
+		
+						</li>
+					</ol>
+					<ul>
+						<li class="fragment fade-left">Robust across languages (e.g. Sproat, 1991)</li>
+						<!-- <li class="fragment fade-up">Mirror-imaged for pre- vs. postnominal modification</li> -->
+					</ul>
+				</section>
+				<section>
+					<h2 class="r-fit-text">Explanations from different perspectives</h2>
+					<ul>
+						<li class="fragment fade-down">Semantic hierarchies (<font size="5">e.g. Dixon, 1982</font>)</li>
+						<li class="fragment fade-right">Syntactic mapping (<font size="5">e.g. Cinque, 1993</font>)</li>
+						<li class="fragment fade-left">Psycholinguistic explanations  (<font size="5">e.g. Martin, 1969; Whorf, 1945</font>)</li>
+					</ul>
+                <p class="fragment fade-up">
+					We focus on <b>two recent hypotheses</b> with <b>experimental support</b> and common, <b>rationality-based</b> theoretical motivation<!--<br/>-->
+					(<font size="5">Scontras, 2017; Fukumura, 2019</font>).
+				</p>
+				</section>
+				<section>
+					<h1>Hypotheses &amp; questions</h1>
+				</section>
+				<section>
+					<section>
+						<h2 class="r-fit-text">Subjectivity predicts ordering</h2>
+						<p class="r-frame">
+							<b><font class="sc">Subjectivity</font> hypothesis</b>: <font color="#32a892"><b>Less subjective</b></font> adjectives
+							are preferred <font class="hear"><b>closer to the noun</b></font> (<font size="5">Scontras et al., 2017</font>).
+						</p>
+						<ul>
+							<li class="fragment fade-up">
+								<b>Explanation</b>: <font color="#32a892"><b>More efficient</b></font> expressions are integrated <font class="hear"><b>earlier
+								in semantic composition</b></font> to minimize misidentification of referents.<br/>
+								(<font size="5">see Scontras et al. 2019, 2020; Simonic, 2018; Franke et al. 2019</font>)
+							</li>
+							<li class="fragment">Subjective adjectives include, e.g., gradable dimension adjectives like <em>big</em>.</li>
+						</ul> 
+					</section>
+					<section>
+						Subjectivity of an adjective was operationalized by Scontras et al. (2017) as <em>faultless disagreement</em>, roughly the degree
+						to which two speakers can disagree about attributing a property to an entity without
+						one of them necessarily being wrong .
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2 class="r-fit-text">Discriminatory strength affects ordering</h2>
+						<p class="r-frame">
+							<b><font class="sc">Discriminatory strength</font> hypothesis</b>: <font color="#32a892"><b>More discriminatory</b></font> adjectives
+							are preferred <font class="earl"><b>earlier in the linear sequence.</b></font>
+							(<font size="5">Fukumura, 2019</font>).
+						</p>
+						<ul>
+							<li class="fragment fade-up">
+								<b>Explanation</b>: <font color="#32a892"><b>More efficient</b></font>
+								expressions are produced <font class="earl"><b>earlier in the linear sequence</b></font>
+								to maximize informativity. 
+							</li>
+							<li class="fragment">Adjectives have maximal discriminatory strength in a given context if they single out a referent perfectly.</li>
+						</ul> 
+					</section>
+					<section>
+						The discriminatory strength of a word  $w$ (in some context $c$) can be defined as $\frac{1}{|[\![w]\!]^c|}$ (<font size="5">cf. Frank &amp; Goodman, 2012</font>) or,
+						more generally, $P(r|w; c)$, where $r$ is the intended referent.
+					</section>
+					<section>
+						More discriminatory adjectives are not only considered more informative
+						but may also be more salient and accessible in a given context.
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2 class="r-fit-text">Comparing the two hypotheses</h2>
+						<ul>
+							<li>Both are based on <font color="#32a892">efficient communication.</font></li>
+							<li>Both assume <em>early</em> use of informative expressions.</li>
+							<li class="fragment">However, due to different perspectives (<font size="6">listener vs. speaker</font>) <em>early</em> means different things
+								(<font size="6"><font class="hear">close to</font> vs. <font class="earl">far from</font>
+								noun in prenominal modification</font>).</li>	
+						</ul>
+					</section>
+					<section>
+						<h2 class="r-fit-text">Different perspectives taken</h2>
+						<div class="container fragment fade-left">
+
+							<div class="col" class="earl">
+							<font class="earl">Speaker who describes...</font>
+							</div>
+							
+							<div class="col">
+							<font class="hear">Listener who identifies...</font>
+							</div>
+						</div>
+						<span>...an intended referent...</span>
+						<div class="container fragment fade-right">
+							<div class="col">
+								...<font class="earl">incrementally</font>...
+							</div>
+							
+							<div class="col">
+								...<font class="hear">sequentially</font>...
+							</div>
+						</div>
+						<span class="fragment fade-up">...based on...</span>
+						<div class="container fragment fade-up">
+
+								<div class="col">
+									...<font class="earl">linear sequence.</font>
+								</div>
+								
+								<div class="col">
+									...<font class="hear">hierarchical structure.</font>
+								</div>
+							</div>
+					</section>
+					<section>
+							<h2 class="r-fit-text">Can the two perspectives be combined?</h2>
+							<ul>
+								<li>
+									<font class="sc"><b>discriminatory strength</b></font> was not tested in the presence of subjectivity gradients.
+								</li>
+								<li>
+									<font class="sc"><b>Subjectivity</b></font> was not tested in a referential task.
+								</li>
+								<li>
+									Predictions of <font class="sc"><b>subjectivity</b></font> regarding choice of referring expressions are indirect:
+									<ul>
+										<li><font size="5">Some instances of inefficient communication may suffice
+											to drive conventionalization.</font></li>
+										<li><font size="5">Such instances my be restricted to certain readings of multi-adjective sequences, involving
+											sequentially intersective context updates (cf. Franke et al. 2019). </font></li>
+										</ul>
+								</li>
+								<li>
+									Nevertheless, <font class="sc"><b>subjectivity</b></font> would be challenged by 'opposite
+									adaptation' in an referential task
+								</li>
+							</ul>							 
+						</section>		
+				</section>
+				<section>
+					<section>
+						<h2>Main empirical question</h2>
+						<p>What happens if the two hypotheses stand in direct conflict?</p>
+						<p class="fragment"><font size="6">An example would be a context where a less subjective adjective
+							discriminates more strongly between potential referents.</font></p>
+					</section>
+					<section>
+						<h2 class="r-fit-text">direct conflict between hypotheses</h2>
+						<img data-src="https://www.lingexp.uni-tuebingen.de/b1/huashan/pictures/l1pic1zrdc.svg" height="380" />
+						<ol start="2">
+							<li>
+								<ol>
+									<li type="a">big blue star</li>
+									<li type="a">blue big star</font></li>
+								</ol>
+			
+							</li>
+						</ol>
+					</section>
+				</section>
+				<section>
+					<h1>Experiment</h1>
+				</section>
+				<section>
+					<section>
+						<h2 class="r-fit-text">Web-based Experiment: preference ratings</h2>
+						<img data-src="experimentsitem1.png" height="420" />
+					</section> 
+					<section>
+						<h2>Glosses</h2>
+						<img data-src="gloss1.png" height="320" />
+					</section>
+					<section>
+						<h2>More glosses</h2>
+						<img data-src="gloss2.png" height="320" />
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Mixed design</h2>
+						<ul>
+							<li>
+								Within factors:
+								<ol>
+									<li class="fragment"><font class="sc">combination</font> of adjectives from different semantic classes<br/>
+										<font size="6">(2 levels: <em>dimension &amp; color/shape</em> versus <em>color &amp; shape</em>)</font></li>
+									<li class="fragment"><font class="sc">relevance</font> of the corresponding properties for reference resolution<br/>
+										(<font size="6">3 levels: <em>first</em>, <em>second</em> or <em>both</em> properties relevant</font>)
+									</li>
+								</ol> 		
+							</li>
+							<li class = "fragment">
+								Between factor <!-- (<font size="6">controlling 'contextual subjectivity'</font>): -->
+								<ol start="3">
+									<li><font class="sc">Size distribution</font> of objects<br/>
+										(<font size="6">2 levels: <em>sharp</em> vs. <em>blurred</em>; controlling 'contextual subjectivity'
+									</font>)</li>
+								</ol>
+							</li>
+						</ul>
+					</section>
+					<section>
+						brdc &ndash; blurred<br/>
+						<img data-src="l4pic4brdc.svg" height="320" />
+					</section>
+					<section>
+						frdc &ndash; blurred<br/>
+						<img data-src="l4pic4erdc.svg" height="320" />
+					</section>
+					<section>
+						srdc &ndash; blurred<br/>
+						<img data-src="l4pic4zrdc.svg" height="320" />
+					</section>
+					<section>
+						Large objects had sizes of $9$ or $10$ (in a somewhat arbitrary unit). Sizes of small objects were
+						sampled from $[1,6]$ in <em>blurred</em> <font class="sc">distributions</font>
+						and from $[1,3]$ in <em>sharp</em> <font class="sc">distributions</font>. 
+					</section>
+					<section>
+						brdc &ndash; sharp<br/>
+						<img data-src="l1pic4brdc.svg" height="320" />
+					</section>
+					<section>
+						frdc &ndash; sharp<br/>
+						<img data-src="l1pic4erdc.svg" height="320" />
+					</section>
+					<section>
+						srdc &ndash; sharp<br/>
+						<img data-src="l1pic4zrdc.svg" height="320" />
+					</section>
+					<section data-background-iframe="https://www.lingexp.uni-tuebingen.de/b1/huashan/web/" data-background-interactive>
+						<div style="position: absolute; top: -140px; right: 50px; text-align: left; width: 30%; font-size: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px;"><!--   -->
+							<h2>120 participants</h2>
+							<p>recruited via prolific.co; 180 trials, 81 experimental items</p>
+						</div>
+					</section>
+				</section>	
+				<section>
+					<h2>Predictions</h2>
+					<p>Preference for...</p>
+					<ul>
+						<li class="fragment fade-left">subjective-<font class="earl">first</font> orders (<font class="sc" size="6">subjectivity</font>)</li>
+						<li class="fragment fade-right">orders with contextually more discriminatory adjectives
+							<font class="earl">first</font> (<font class="sc" size="6">discriminatory strength</font>)</li>
+					</ul>
+					<p class="fragment fade-up">Reduced preference for...</p>
+					<ul>
+						<li class="fragment fade-up"><em>big</em>-<font class="earl">first</font> orders in <em>sharp</em> distributions,
+							where <em>big</em> is effectively non-subjective (<font size="6">derived from <font class="sc">subjectivity</font>
+							but potentially in conflict with <font class="sc">discriminatory strength</font></font>)</li>
+					</ul>
+				</section>
+				<section data-background="#dddddd" data-auto-animate>
+					<h2>Results</h2>
+					<img data-src="exp_plot.png" align="top" height="450" />
+					<ul>
+						<li><font size="6">Preference for orders with contextually more discriminatory adjectives <font class="earl">first</font></font>
+							(<font size="5">as expected</font>)</li>	
+					</ul>
+				</section>
+				<section data-background="#dddddd" data-auto-animate>
+					<h2>Results</h2>
+					<img data-src="exp_plot.png" align="top" height="450" />
+					<ul>
+						<li><font size="6">Preference for subjective-<font class="earl">first</font> orders</font> <br/>(<font size="5">as expected		</font>)</li> -->
+					</ul>
+				</section>
+					<section data-background="#dddddd" data-auto-animate>
+					<h2>Results</h2>
+					<img data-src="exp_plot.png" align="top" height="450" />
+					<ul>
+						<li><font size="6">In <em>big-relevant</em> contexts with <em>sharp</em> <font class="sc">distribution</font>, preference for <em>tall</em>-<font class="earl">first</font> orders <b>increased</b> &ndash;
+							<b>contrary to prediction from <font class="sc">subjectivity</font></font></b></ul>
+				</section>
+				<section>
+					<h2>Discussion</h2>
+					<ul>
+						<li class="fragment">Effects of <font class="sc">subjectivity</font> and <font class="sc">discriminatory strength</font> replicated<br/>
+							<span class="fragment">$\Rightarrow$ Both factors contribute to ordering preferences</span></li>
+						<li class="fragment">Interaction indicates that preference for subjective-<font class="earl">first</font> ordering is
+							increased if these adjectives are <font color="#32a892">contextually more informative</font>.<br/> 
+							<span class="fragment">$\Rightarrow$ Challenges explanation of <font class="sc">subjectivity</font> 
+								based on low communicative efficiency</span>	
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Computational Model</h1>
+				</section>
+				<section>
+					<section>
+						<h2 class="r-fit-text">Phenomena we want to model</h2>
+						<h3 class="r-fit-text">in RSA framework (building on previous work)</h3>
+						<ul>
+							<li class="fragment">Redundancy (<font size="6">calls for 'continuous' semantics;</font> <font size="5">Degen et al. 2020</font>)</li>
+							<li class="fragment">Ordering preferences<br/> (<font size="6">necessitate sequential restriction or incrementality</font>)</li>
+							<ul>
+								<li class="fragment"><font class="sc">Subjectivity</font><br/> (<font size="6">suggests listener perspective</font>)</li>
+								<li class="fragment"><font class="sc">Discriminatory strength</font><br/> (<font size="6">suggests speaker perspective</font>)</li>	
+							</ul>
+						</ul>
+					</section>
+					<section>
+						<h2>Previous modeling work</h2>
+						<ul>
+							<li>Redundancy (<font size="5">e.g. Degen et al. 2020</font>)</li>
+							<li>Subjectivity (<font size="5">Simonic, 2018; Scontras et al., 2019;
+								Franke et al., 2019</font>)
+							</li>
+							<li>
+								Incremental interpretation in RSA<br/> (<font size="5">Cohn-Gordon et al., 2019; Waldon &amp; Degen, 2021; Yu, Waldon &amp; Degen, 2023</font>)
+							</li>
+						</ul>
+					</section>
+					<section>
+						<ul>
+							<li>
+								<font size="6">From listener perspective, ordering preferences
+								require context-dependent meanings (because of commutativity)</font>
+							</li>
+							<li class="fragment">
+								<font size="6">Lexical meanings:</font><br/>
+								<font size="5">
+									\[\begin{aligned}
+									[\![big]\!]^C &amp;=  \lambda x. size(x) > max(C) - \frac{k}{100} * (max(C) - min(C))\\  
+									[\![blue]\!]^C &amp;:  \textrm{coinflip}\\   	
+									\end{aligned}\]	
+								</font>
+							</li>
+						</ul>
+					</section>
+				</section>
+				<section>
+				<h2>Idea for incremental model</h2>
+				<ul>
+					<li class="fragment">Incremental listener interprets from $\underleftarrow{\textrm{right to left}}$ (<font size="6">i.e. restricts potential referents
+						sequentially, in accordance with preferred interpretation</font>).
+					</li>
+					<li class="fragment">Incremental speaker maximizes informativity at each word from $\underrightarrow{\textrm{left to right}}$.</li>
+				</ul>
+				</section>
+				<section>
+					<section data-background="#dddddd">
+						<h2>Fully incremental model</h2>
+						<img data-src="inc_model.png" width="100%" />
+					</section>
+					<section data-background="#dddddd">
+						<font size="6">
+							<p>In all definitions above:</p>
+							<ul>
+								<li>$r$ stands for a referent;</li>
+								<li>$w_i$, $w_{i,n}$ and $\overrightarrow{w}$ stand for the i-th word in a sequence,
+									a sequence of $n-i$ words and any sequence of one or more words, respectively;
+								</li> 
+								<li>
+									$supp(\cdot)$ denotes the support of a probability distribution;
+								</li>
+								<li>$P$ denotes prior probabilities over referents and utterances;</li> 
+								<li>$P_{Lang}$ assigns prior probabilities to potential next words;</li>
+								<li>and, finally, $\alpha$ and $\beta$ are rationality parameters that govern the soft-max functions defined in rows (6) and (7), respectively.</li>
+							</ul>
+							<p>In addition we used a bias in the prior $P(w_{1,n})$ of $S^{inc\_utt}_1$.</p>
+						</font>
+					</section>
+				</section>
+				
+				<section>
+					<section data-background="#dddddd">
+						<h2>Qualitative results</h2>
+						<img data-src="p_bias2_a1_b1.png" width="45%" />
+						<ul><li><font size="6">Qualitative effects captured with biased incremental speaker</font></li></ul>
+					</section>
+					<section>
+						<p>We got there in three steps...</p>
+					</section>
+					<section data-background="#dddddd" data-auto-animate>
+						<h2>Qualitative results</h2>
+						<img data-src="p_bias1_a5_b5.png" width="45%" /><br/>
+						<ul><li><font size="6">Interaction might be there</font></li></ul>
+					</section>
+					<section data-background="#dddddd" data-auto-animate>
+						<h2>Qualitative results</h2>
+						<img data-src="p_bias1_a5_b5.png" width="45%" /><br/>
+						<font size="6">$\Rightarrow$ decrease rationality parameter $\alpha$ to move away from ceiling</font>
+					</section>
+					<section data-background="#dddddd" data-auto-animate>
+						<h2>Qualitative results</h2>
+						<img data-src="p_bias1_a1_b1.png" width="45%" /><br/>
+						<ul><li><font size="6">Better, but no preference for subjective-first orders</font></li></ul>
+					</section>
+					<section data-background="#dddddd" data-auto-animate>
+						<h2>Qualitative results</h2>
+						<img data-src="p_bias1_a1_b1.png" width="45%" /><br/>
+						<font size="6">$\Rightarrow$ introduce <em>bias</em></font>
+					</section>
+					<section data-background="#dddddd" data-auto-animate>
+						<h2>Qualitative results</h2>
+						<img data-src="p_bias2_a1_b1.png" width="45%" />
+						<ul><li><font size="6">Qualitative effects captured with biased incremental speaker</font></li></ul>
+					</section>	
+				</section>
+				<section>
+					<h2>General Discussion</h2>
+					<ul>
+						<li>The <b>observed contextual adaptation challenges an explanation</b> of <font class="sc">subjectivity</font> 
+							that is <b>based on low communicative efficiency</b> alone.</li>
+						<li class="	fragment">Qualitative effects are captured with biased incremental speaker</li>	
+						<span class="fragment">$\Rightarrow$ Is incremental listener not needed?</span><br/>
+						<span class="fragment">$\Rightarrow$ What's the relation to previous computational accounts of <font class="sc">subjectivity</font> (<font size="6">"random contexts"</font>)? </span>
+						<li class="fragment">Are gradable dimension adjectives informative because they communicate extreme values? </li>
+					</ul>						
+				</section>
+				<section>
+					<h2>Next steps</h2>
+					<ul>
+						<li class="fragment">We are currently working on Bayesian data analysis in order to perform  quantitative model comparisons (<font size="6">linking function important</font>).</li>
+						<li class="fragment">We aim to model data from a free production task using the same models.</li>
+						<li class="fragment">We want to take steps towards a general model of interpretation based on truly incremental semantics (e.g. Bott &amp; Sternefeld, 2017).
+					</ul>
+				</section>
+			    <section data-markdown>
+					## Thank you!
+				</section>
+				<!-- <section>
+					<table>
+						<colgroup>
+							<col span="1" style="width: 15%;">
+							<col span="1" style="width: 30%;">
+							<col span="1" style="width: 65%;">
+						 </colgroup>
+						 
+						 
+						 
+						 <tbody>
+							<tr>
+								<td>Incremental Listener</td>
+								<td>$L_0^{inc}(s|w_{1})$<span style="font-size: 30px;"> &prop;</span></td>
+								<td > $[\![w_{1}]\!]^{supp(P)}(s)* P(s)$</td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>5</td>
+								<td>6</td>
+							</tr>
+						 </tbody>
+						
+					</table>
+				</section> -->
+			</div>
+		</div>  
+                
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script src="plugin/math/math.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+                
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+			}); 
+		</script>
+	</body>     
+</html>         
+                
