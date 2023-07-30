@@ -34,15 +34,14 @@
 		<div class="reveal">
 			<div class="slides">
 				<section  data-background-color="#f2f0eb">
-					<h2 class="r-fit-text">An incremental RSA model</h1>
-					<h2 class="r-fit-text">for adjective ordering preferences</h1><br/>	
-					Fabian Schlotterbeck &amp; Hening Wang<br/>
+					<h3>A quantitative exploration of adjective ordering preferences with an incremental Rational Speech Act model</h1>
+					Hening Wang &amp; Fabian Schlotterbeck <br/>
 					<!-- University of Tübingen -->
-					<img data-src="UT_WBMW_Rot_RGB_01.png" height="150" />
+					<img data-src="UT_WBMW_Rot_RGB_01.png" height="100" />
 					<br/><br/>
 					
-					<b>Poster at SCiL 2023</b><br/>
-					UMass, Amherst, 16 June 2023<br/>
+					<b>Presentation at ESSLLI 2023 Pros &amp; Comps Workshop</b><br/>
+					Ljubljana, Slovenia, 2. Aug. 2023<br/>
 				</section>
 				<section>
 					<h1>Introduction</h1>
@@ -54,8 +53,9 @@
 							<ol>
 								<li type="a"><b>big white bear</b></li>
 								<li type="a"><font color="#A1A1A1">white big bear</font></li>
+								<img data-src="big_white_bear.jpeg" height="150" />
 							</ol>
-		
+
 						</li>
 					</ol>
 					<ul>
@@ -390,6 +390,9 @@
 					</section>
 				</section>
 				<section>
+					<p> Perhaps here a brief introduction to the standard RSA? </p>
+				</section>
+				<section>
 				<h2>Idea for incremental model</h2>
 				<ul>
 					<li class="fragment">Incremental listener interprets from $\underleftarrow{\textrm{right to left}}$ (<font size="6">i.e. restricts potential referents
@@ -421,42 +424,208 @@
 							<p>In addition we used a bias in the prior $P(w_{1,n})$ of $S^{inc\_utt}_1$.</p>
 						</font>
 					</section>
-				</section>
-				
+				</section>	
 				<section>
 					<section data-background="#dddddd">
-						<h2>Qualitative results</h2>
-						<img data-src="p_bias2_a1_b1.png" width="45%" />
-						<ul><li><font size="6">Qualitative effects captured with biased incremental speaker</font></li></ul>
+						<h3>Quantitative results</h2>
+						<div style="display: flex; justify-content: space-between;" >
+							<div style="flex: 1; text-align: center;">
+								<img data-src="empirical_data.png" width="90%" />
+								<ul><li><font size="6">Empirical data</font></li></ul>
+							</div>
+							<div style="flex: 1; text-align: center;">
+								<img data-src="02_mean_predictions_plot.png" width="90%" />
+								<ul>
+									<li><font size="6">Posterior predictions from the best model</font></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+					<section data-background="#dddddd">
+						<h3>Correlation plot of the best model</h2>
+						<div style="display: flex; justify-content: space-between;" >
+							<img data-src="02_correlation.png" width="90%" />
+						</div>
+					</section>
+					<section data-background="#dddddd">
+						<h3>Posterior model parameter distributions</h2>
+						<img data-src="02_posterior_samples.png" width="90%" />
+						<p> <font size="6"> Maximum a posteriori (MAP) and 90% highest density interval (HDI) for each parameters:</font></p>
+						
+						<div style="display: flex; justify-content: space-between;" >
+							<div style="flex: 1; text-align: center;">
+								<font size="4">bias: MAP = 0.30, HDI = [0.26, 0.34]</font><br/>
+								<font size="4">color semantic value: MAP = 0.94, HDI = [0.94, 0.94]</font><br/>
+								<font size="4">alpha(gamma): MAP = 3.16, HDI = [2.98, 3.35]</font><br/>
+								<font size="4">k: MAP = 0.47, HDI = [0.41, 0.53]</font><br/> 
+							</div>
+							<div style="flex: 1; text-align: center;">
+								<font size="4">sigma: MAP = 0.10, HDI = [0.10, 0.10]</font><br/>
+								<font size="4">steepness: MAP = 0.70, HDI = [0.31, 1.14]</font><br/>
+								<font size="4">wf: MAP = 0.93, HDI = [0.91, 0.96]</font><br/>
+							</div>
+						</div>
+					</section>
+					<section data-background="#dddddd">
+						<h3>Prior model parameter distributions and model specifications</h2>
+							<div style="display: flex; justify-content: space-between;" >
+								<div style="flex: 1; text-align: center;">
+									<ul style="font-size: 20px;">
+										
+										<li>
+											$color\_semvalue \sim Uniform(0,1)$
+										</li>
+										
+										<li>
+											$k \sim Uniform(0,1)$
+										</li>
+										<li>
+											$wf \sim Uniform(0,1)$
+										</li>
+										<li>
+											$alpha \sim HalfNormal(5)$
+										</li>
+										<li>
+											$bias \sim HalfNormal(5)$
+										</li>
+										
+										<li>
+											$steepness \sim Uniform(0,1)$
+										</li>
+										<li>
+											$sigma \sim Uniform(0,0.10)$ if sample distribution is TruncatedNormal
+										</li>
+										<li>
+											$sigma(v) \sim Uniform(0,2)$ if sample distribution is Beta (reparameterized as mean and concentration)
+										</li>
+										
+									</ul>
+								</div>
+								<div style="flex: 1; text-align: center;">
+									<img data-src="model_specification.png" width="90%" />
+								</div>
+							</div>
+						
+					</section>
+					<section data-background="#dddddd">
+						<h3>Model selection methods: Grid Search like</h2>
+						<div style="display: flex; justify-content: space-between;" >
+							<div style="flex: 1; text-align: center;">
+								<ul style="font-size: 30px;"> Search space:
+									<li>
+										Speaker: [incremental, global]
+									</li>
+									<li>
+										Sem. methods of size Adj.: [context dependent (sampling based), fixed (support based)]
+									</li>
+									<li>
+										Sample distribution: [TruncatedNormal, Beta]
+									</li>
+									<li>
+										Link function: [logit, logistic, linear, identity]
+									</li>
+								</ul>
+							</div>
+							<div style="flex: 1; text-align: center;">
+								<ul style="font-size: 30px;">Scores:
+									<li>
+										$R^2$ correlation coefficient
+									</li>
+									<li>
+										Mean Squre Error (MSE)
+									</li>
+									<li>
+										Log Predictive Density (LPD)
+									</li>
+									<li>
+										Empirical interaction effect
+									</li>
+								</ul>
+							</div>
+						</div>
+						<p>Parameters for MCMC sampler:</p>num_warmup = 5000, num_samples = 30000
+					</section>
+
+					<section data-background="#dddddd">
+						<h3>Comparing with the baseline model</h2>
+						<div style="display: flex; justify-content: space-between;" >
+							<div style="flex: 1; text-align: center;">
+								<img data-src="02_mean_predictions_plot.png" width="90%" />
+								<ul><li><font size="6">Best model with incremental speaker and context-dependent semantics</font></li></ul>
+							</div>
+							<div style="flex: 1; text-align: center;">
+								<img data-src="01_mean_predictions_plot.png" width="90%" />
+								<ul><li><font size="6">Baseline model with global speaker and fix semantics</font></li></ul>
+							</div>
+						</div>
 					</section>
 					<section>
-						<p>We got there in three steps...</p>
+						<p>This slide provides information between model comparisons of 1,2,3,11, i.e. inc vs. gb, sampling vs. support </p>
+							<table class="tg">
+							<thead>
+							  <tr>
+								<th class="tg-0lax"></th>
+								<th class="tg-0lax">$R^2$</th>
+								<th class="tg-0lax">MSE</th>
+								<th class="tg-0lax">LPD</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr>
+								<td class="tg-0lax">baseline: G. S. + Normal + Logit + c. Sem.</td>
+								<td class="tg-0lax"></td>
+								<td class="tg-0lax"></td>
+								<td class="tg-0lax"></td>
+							  </tr>
+							  <tr>
+								<td class="tg-0lax">baseline with f. Sem.</td>
+								<td class="tg-0lax"></td>
+								<td class="tg-0lax"></td>
+								<td class="tg-0lax"></td>
+							  </tr>
+							  <tr>
+								<td class="tg-0lax">Inc. S. with c. Sem.</td>
+								<td class="tg-0lax"></td>
+								<td class="tg-0lax"></td>
+								<td class="tg-0lax"></td>
+							  </tr>
+							  <tr>
+								<td class="tg-0lax">Inc. S. with f. Sem.</td>
+								<td class="tg-0lax"></td>
+								<td class="tg-0lax"></td>
+								<td class="tg-0lax"></td>
+							  </tr>
+							</tbody>
+							</table>
 					</section>
-					<section data-background="#dddddd" data-auto-animate>
-						<h2>Qualitative results</h2>
-						<img data-src="p_bias1_a5_b5.png" width="45%" /><br/>
-						<ul><li><font size="6">Interaction might be there</font></li></ul>
+					<section>
+						<p>This slide provides information between model comparisons of 2,4,5,6,7,8,9,10, i.e. different link functions and different sample distributions</p>
 					</section>
-					<section data-background="#dddddd" data-auto-animate>
-						<h2>Qualitative results</h2>
-						<img data-src="p_bias1_a5_b5.png" width="45%" /><br/>
-						<font size="6">$\Rightarrow$ decrease rationality parameter $\alpha$ to move away from ceiling</font>
-					</section>
-					<section data-background="#dddddd" data-auto-animate>
-						<h2>Qualitative results</h2>
-						<img data-src="p_bias1_a1_b1.png" width="45%" /><br/>
-						<ul><li><font size="6">Better, but no preference for subjective-first orders</font></li></ul>
-					</section>
-					<section data-background="#dddddd" data-auto-animate>
-						<h2>Qualitative results</h2>
-						<img data-src="p_bias1_a1_b1.png" width="45%" /><br/>
-						<font size="6">$\Rightarrow$ introduce <em>bias</em></font>
-					</section>
-					<section data-background="#dddddd" data-auto-animate>
-						<h2>Qualitative results</h2>
-						<img data-src="p_bias2_a1_b1.png" width="45%" />
-						<ul><li><font size="6">Qualitative effects captured with biased incremental speaker</font></li></ul>
-					</section>	
+
+				</section>
+				<section>
+					<p>Discussion</p>
+				</section>
+				<section>
+					<p>This slide provides information about nessecciate of random effects structure</p>
+					<img data-src="random_effect_small.png" width="70%" /> </br>
+					<p> </p>
+				</section>
+				<section>
+					<p>This slide provides information about production data and glmer analysis</p>
+					<div style="display: flex; justify-content: space-between;" >
+						<div style="flex: 1; text-align: center;">
+							<img data-src="relativ_blurred_eng.pdf" width="90%" />
+							<ul><li><font size="6"> Best model with incremental speaker and context-dependent semantics</font></li></ul>
+						</div>
+						<div style="flex: 1; text-align: center;">
+							<img data-src="relativ_sharp_eng.pdf" width="90%" />
+							<ul><li><font size="6"> Baseline model with global speaker and fix semantics</font></li></ul>
+						</div>
+					</div>
+				</section>
+				<section>
+					<p>This slide provides information about random states </p>
 				</section>
 				<section>
 					<h2>General Discussion</h2>
@@ -526,4 +695,32 @@
 		</script>
 	</body>     
 </html>         
-                
+
+<section>
+	<p>We got there in three steps...</p>
+</section>
+<section data-background="#dddddd" data-auto-animate>
+	<h2>Qualitative results</h2>
+	<img data-src="p_bias1_a5_b5.png" width="45%" /><br/>
+	<ul><li><font size="6">Interaction might be there</font></li></ul>
+</section>
+<section data-background="#dddddd" data-auto-animate>
+	<h2>Qualitative results</h2>
+	<img data-src="p_bias1_a5_b5.png" width="45%" /><br/>
+	<font size="6">$\Rightarrow$ decrease rationality parameter $\alpha$ to move away from ceiling</font>
+</section>
+<section data-background="#dddddd" data-auto-animate>
+	<h2>Qualitative results</h2>
+	<img data-src="p_bias1_a1_b1.png" width="45%" /><br/>
+	<ul><li><font size="6">Better, but no preference for subjective-first orders</font></li></ul>
+</section>
+<section data-background="#dddddd" data-auto-animate>
+	<h2>Qualitative results</h2>
+	<img data-src="p_bias1_a1_b1.png" width="45%" /><br/>
+	<font size="6">$\Rightarrow$ introduce <em>bias</em></font>
+</section>
+<section data-background="#dddddd" data-auto-animate>
+	<h2>Qualitative results</h2>
+	<img data-src="p_bias2_a1_b1.png" width="45%" />
+	<ul><li><font size="6">Qualitative effects captured with biased incremental speaker</font></li></ul>
+</section>	
