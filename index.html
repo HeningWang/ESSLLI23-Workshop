@@ -425,18 +425,134 @@
 						</font>
 					</section>
 				</section>	
+				<section data-background="#dddddd">
+					<h3>Prior model parameter distributions and model specifications</h2>
+						<div style="display: flex; justify-content: space-between;" >
+							<div style="flex: 1; text-align: center;">
+								<ul style="font-size: 20px;">
+									
+									<li>
+										$color\_semvalue \sim Uniform(0,1)$
+									</li>
+									
+									<li>
+										$k \sim Uniform(0,1)$
+									</li>
+									<li>
+										$wf \sim Uniform(0,1)$
+									</li>
+									<li>
+										$alpha \sim HalfNormal(5)$
+									</li>
+									<li>
+										$bias \sim HalfNormal(5)$
+									</li>
+									
+									<li>
+										$steepness \sim Uniform(0,1)$
+									</li>
+									<li>
+										$sigma \sim Uniform(0,0.10)$  
+									</li>
+									<span>if sample distribution is $TruncatedNormal$($loc$ = predicted likelihood, $scale$ = $sigma$, $lower$ = $0$, $upper$ = $1$)</span><br/>
+									<li>
+										$v \sim Uniform(0,2)$
+									</li>
+									<span>if sample distribution is $Beta$($loc$ = predicted likelihood, $concentration$ = $v$)</span><br/>
+									
+								</ul>
+							</div>
+							<div style="flex: 1; text-align: center;">
+								<img data-src="model_specification.png" width="90%" />
+							</div>
+						</div>
+				</section>
+				<section data-background="#dddddd">
+					<h3>Model selection methods: Grid Search like</h2>
+					<div style="display: flex; justify-content: space-between;" >
+						<div style="flex: 1; text-align: center;">
+							<ul style="font-size: 30px;"> Search space:
+								<li>
+									Speaker: [incremental, global]
+								</li>
+								<li>
+									Sem. methods of size Adj.: [context dependent (sampling based), fixed (support based)]
+								</li>
+								<li>
+									Sample distribution: [TruncatedNormal, Beta]
+								</li>
+								<li>
+									Link function: [logit, logistic, linear, identity]
+								</li>
+							</ul>
+						</div>
+						<div style="flex: 1; text-align: center;">
+							<ul style="font-size: 30px;">Scores:
+								<li>
+									Pearson Correlation Coefficient
+								</li>
+								<li>
+									L2 Error
+								</li>
+								<li>
+									Log Predictive Density (LPD)
+								</li>
+							</ul>
+						</div>
+					</div>
+					<p style="font-size: 30px;">Parameters for MCMC sampler: num_warmup = 5000, num_samples = 30000 (Aver. Runtime for a single model: about 1h using numpyro and A100)</p>
+				</section>
+				<section>
+					<h3>Results </h3>
+					<table>
+						<thead>
+						  <tr>
+							<th></th>
+							<th>Corr. Coeff.</th>
+							<th>L2</th>
+							<th>LPD</th>
+						  </tr>
+						</thead>
+						<tbody>
+						  <tr>
+							<td>baseline: Global Speaker + f. Semantic</td>
+							<td>0.289</td>
+							<td>0.140</td>
+							<td>-6.991</td>
+						  </tr>
+						  <tr>
+							<td>Global Speaker + c. Semantic</td>
+							<td>0.290</td>
+							<td>0.140</td>
+							<td>-6.991</td>
+						  </tr>
+						  <tr>
+							<td>Inc. Speaker + c. Semantic</td>
+							<td><b>0.299*</b></td>
+							<td><b>0.140*</b></td>
+							<td><b>-6.989*</b></td>
+						  </tr>
+						  <tr>
+							<td>Inc. Speaker + f. Semantic</td>
+							<td>0.299</td>
+							<td>0.140</td>
+							<td>-6.989</td>
+						  </tr>
+						</tbody>
+						</table>
+				</section>
 				<section>
 					<section data-background="#dddddd">
-						<h3>Quantitative results</h2>
+						<h3>Posterior analysis for the best model</h2>
 						<div style="display: flex; justify-content: space-between;" >
 							<div style="flex: 1; text-align: center;">
 								<img data-src="empirical_data.png" width="90%" />
 								<ul><li><font size="6">Empirical data</font></li></ul>
 							</div>
 							<div style="flex: 1; text-align: center;">
-								<img data-src="02_mean_predictions_plot.png" width="90%" />
+								<img data-src="07_predictions.png" width="90%" />
 								<ul>
-									<li><font size="6">Posterior predictions from the best model</font></li>
+									<li><font size="6">Aggregated mean posterior predictions from the best model</font></li>
 								</ul>
 							</div>
 						</div>
@@ -444,205 +560,164 @@
 					<section data-background="#dddddd">
 						<h3>Correlation plot of the best model</h2>
 						<div style="display: flex; justify-content: space-between;" >
-							<img data-src="02_correlation.png" width="90%" />
+							<img data-src="07_correlation.png" width="90%" />
 						</div>
 					</section>
-					<section data-background="#dddddd">
-						<h3>Posterior model parameter distributions</h2>
-						<img data-src="02_posterior_samples.png" width="90%" />
-						<p> <font size="6"> Maximum a posteriori (MAP) and 90% highest density interval (HDI) for each parameters:</font></p>
-						
-						<div style="display: flex; justify-content: space-between;" >
-							<div style="flex: 1; text-align: center;">
-								<font size="4">bias: MAP = 0.30, HDI = [0.26, 0.34]</font><br/>
-								<font size="4">color semantic value: MAP = 0.94, HDI = [0.94, 0.94]</font><br/>
-								<font size="4">alpha(gamma): MAP = 3.16, HDI = [2.98, 3.35]</font><br/>
-								<font size="4">k: MAP = 0.47, HDI = [0.41, 0.53]</font><br/> 
-							</div>
-							<div style="flex: 1; text-align: center;">
-								<font size="4">sigma: MAP = 0.10, HDI = [0.10, 0.10]</font><br/>
-								<font size="4">steepness: MAP = 0.70, HDI = [0.31, 1.14]</font><br/>
-								<font size="4">wf: MAP = 0.93, HDI = [0.91, 0.96]</font><br/>
-							</div>
-						</div>
-					</section>
-					<section data-background="#dddddd">
-						<h3>Prior model parameter distributions and model specifications</h2>
-							<div style="display: flex; justify-content: space-between;" >
-								<div style="flex: 1; text-align: center;">
-									<ul style="font-size: 20px;">
-										
-										<li>
-											$color\_semvalue \sim Uniform(0,1)$
-										</li>
-										
-										<li>
-											$k \sim Uniform(0,1)$
-										</li>
-										<li>
-											$wf \sim Uniform(0,1)$
-										</li>
-										<li>
-											$alpha \sim HalfNormal(5)$
-										</li>
-										<li>
-											$bias \sim HalfNormal(5)$
-										</li>
-										
-										<li>
-											$steepness \sim Uniform(0,1)$
-										</li>
-										<li>
-											$sigma \sim Uniform(0,0.10)$ if sample distribution is TruncatedNormal
-										</li>
-										<li>
-											$sigma(v) \sim Uniform(0,2)$ if sample distribution is Beta (reparameterized as mean and concentration)
-										</li>
-										
-									</ul>
-								</div>
-								<div style="flex: 1; text-align: center;">
-									<img data-src="model_specification.png" width="90%" />
-								</div>
-							</div>
-						
-					</section>
-					<section data-background="#dddddd">
-						<h3>Model selection methods: Grid Search like</h2>
-						<div style="display: flex; justify-content: space-between;" >
-							<div style="flex: 1; text-align: center;">
-								<ul style="font-size: 30px;"> Search space:
-									<li>
-										Speaker: [incremental, global]
-									</li>
-									<li>
-										Sem. methods of size Adj.: [context dependent (sampling based), fixed (support based)]
-									</li>
-									<li>
-										Sample distribution: [TruncatedNormal, Beta]
-									</li>
-									<li>
-										Link function: [logit, logistic, linear, identity]
-									</li>
-								</ul>
-							</div>
-							<div style="flex: 1; text-align: center;">
-								<ul style="font-size: 30px;">Scores:
-									<li>
-										$R^2$ correlation coefficient
-									</li>
-									<li>
-										Mean Squre Error (MSE)
-									</li>
-									<li>
-										Log Predictive Density (LPD)
-									</li>
-									<li>
-										Empirical interaction effect
-									</li>
-								</ul>
-							</div>
-						</div>
-						<p>Parameters for MCMC sampler:</p>num_warmup = 5000, num_samples = 30000
-					</section>
-
 					<section data-background="#dddddd">
 						<h3>Comparing with the baseline model</h2>
 						<div style="display: flex; justify-content: space-between;" >
 							<div style="flex: 1; text-align: center;">
-								<img data-src="02_mean_predictions_plot.png" width="90%" />
+								<img data-src="07_predictions.png" width="90%" />
 								<ul><li><font size="6">Best model with incremental speaker and context-dependent semantics</font></li></ul>
 							</div>
 							<div style="flex: 1; text-align: center;">
-								<img data-src="01_mean_predictions_plot.png" width="90%" />
+								<img data-src="14_predictions.png" width="90%" />
 								<ul><li><font size="6">Baseline model with global speaker and fix semantics</font></li></ul>
 							</div>
 						</div>
 					</section>
-					<section>
-						<p>This slide provides information between model comparisons of 1,2,3,11, i.e. inc vs. gb, sampling vs. support </p>
-							<table class="tg">
+					<section data-background="#dddddd">
+						<h3>Posterior model parameter distributions</h2>
+						<img data-src="07_posteriors.png" width="90%" />
+						<p> <font size="4"> Maximum a posteriori (MAP) and 90% highest density interval (HDI) for each parameters:</font></p>
+						
+						<div style="display: flex; justify-content: space-between;" >
+							<div style="flex: 1; text-align: center;">
+								<font size="4">bias: MAP = 0.70, HDI = [0.22, 1.07]</font><br/>
+								<font size="4">color semantic value: MAP = 0.95, HDI = [0.94, 0.95]</font><br/>
+								<font size="4">alpha(gamma): MAP = 1.99, HDI = [1.16, 2.71]</font><br/>
+								<font size="4">k: MAP = 0.42, HDI = [0.16, 0.67]</font><br/> 
+							</div>
+							<div style="flex: 1; text-align: center;">
+								<font size="4">v: MAP = 0.38, HDI = [0.36, 0.39]</font><br/>
+								<font size="4">steepness: MAP = 0.52, HDI = [0.12, 0.93]</font><br/>
+								<font size="4">wf: MAP = 0.84, HDI = [0.76, 0.93]</font><br/>
+							</div>
+						</div>
+					</section>
+				</section>
+				<section>
+					<h3>Histogram of empirical slider values</h2>
+					<img data-src="histogram.png" width="60%" /> </br>
+					<span>Link function needed?</span>
+				</section>
+				<section>
+					<h3>Comparison of link functions and sample distributions</h2>
+						<table style="margin-left: -100px;">
 							<thead>
 							  <tr>
-								<th class="tg-0lax"></th>
-								<th class="tg-0lax">$R^2$</th>
-								<th class="tg-0lax">MSE</th>
-								<th class="tg-0lax">LPD</th>
+								<th></th>
+								<th></th>
+								<th>Normal</th>
+								<th></th>
+								<th></th>
+								<th>Beta</th>
+								<th></th>
 							  </tr>
 							</thead>
 							<tbody>
 							  <tr>
-								<td class="tg-0lax">baseline: G. S. + Normal + Logit + c. Sem.</td>
-								<td class="tg-0lax"></td>
-								<td class="tg-0lax"></td>
-								<td class="tg-0lax"></td>
+								<td></td>
+								<td>Corr. Coeff.</td>
+								<td>L2</td>
+								<td>LPD</td>
+								<td>Corr. Coeff.</td>
+								<td>L2</td>
+								<td>LPD</td>
 							  </tr>
 							  <tr>
-								<td class="tg-0lax">baseline with f. Sem.</td>
-								<td class="tg-0lax"></td>
-								<td class="tg-0lax"></td>
-								<td class="tg-0lax"></td>
+								<td>logit</td>
+								<td>0.299*</td>
+								<td>0.132</td>
+								<td>-15.540*</td>
+								<td>0.298*</td>
+								<td>0.140*</td>
+								<td>-6.989*</td>
 							  </tr>
 							  <tr>
-								<td class="tg-0lax">Inc. S. with c. Sem.</td>
-								<td class="tg-0lax"></td>
-								<td class="tg-0lax"></td>
-								<td class="tg-0lax"></td>
+								<td>logistic</td>
+								<td>0.298</td>
+								<td>0.132</td>
+								<td>-15.544</td>
+								<td>0.005</td>
+								<td>0.186</td>
+								<td>-7.080</td>
 							  </tr>
 							  <tr>
-								<td class="tg-0lax">Inc. S. with f. Sem.</td>
-								<td class="tg-0lax"></td>
-								<td class="tg-0lax"></td>
-								<td class="tg-0lax"></td>
+								<td>linear</td>
+								<td>0.299*</td>
+								<td>0.132</td>
+								<td>-15.542</td>
+								<td>0.295</td>
+								<td>0.145</td>
+								<td>-7.002</td>
+							  </tr>
+							  <tr>
+								<td>identity</td>
+								<td>0.298</td>
+								<td>0.132</td>
+								<td>-15.542</td>
+								<td>0.298*</td>
+								<td>0.140*</td>
+								<td>-6.989*</td>
 							  </tr>
 							</tbody>
 							</table>
-					</section>
+				</section>
+				<section>
 					<section>
-						<p>This slide provides information between model comparisons of 2,4,5,6,7,8,9,10, i.e. different link functions and different sample distributions</p>
+					<h2>Discussion</h2>
+					<ul style="font-size: 30px;">
+						<li class="	fragment">Incremental speaker model based on context dependent size semantics with Beta as sample distribution and logit link function yields the best result</li>
+						<li class="	fragment">Global speaker model generates predicitions opposite to empirical data, but in line with theory predicitons.</li>
+						<li class="	fragment">Account for accurate estimation of aggregated mean and correlation </li>
+						<li class="fragment"> Range of predictions from Beta distribution does not align. </li>
+						<li class="	fragment">Random effects structure needed to account for variances</li>	
+					</ul>
+					</section>	
+					<section>
+						<h3>Aggregated Mean by conditions and participants</h3>
+						<img data-src="random_effect_small.png" width="70%" /> </br>
 					</section>
-
-				</section>
-				<section>
-					<p>Discussion</p>
-				</section>
-				<section>
-					<p>This slide provides information about nessecciate of random effects structure</p>
-					<img data-src="random_effect_small.png" width="70%" /> </br>
-					<p> </p>
-				</section>
-				<section>
-					<p>This slide provides information about production data and glmer analysis</p>
-					<div style="display: flex; justify-content: space-between;" >
-						<div style="flex: 1; text-align: center;">
-							<img data-src="relativ_blurred_eng.pdf" width="90%" />
-							<ul><li><font size="6"> Best model with incremental speaker and context-dependent semantics</font></li></ul>
-						</div>
-						<div style="flex: 1; text-align: center;">
-							<img data-src="relativ_sharp_eng.pdf" width="90%" />
-							<ul><li><font size="6"> Baseline model with global speaker and fix semantics</font></li></ul>
-						</div>
-					</div>
-				</section>
-				<section>
-					<p>This slide provides information about random states </p>
 				</section>
 				<section>
 					<h2>General Discussion</h2>
 					<ul>
 						<li>The <b>observed contextual adaptation challenges an explanation</b> of <font class="sc">subjectivity</font> 
 							that is <b>based on low communicative efficiency</b> alone.</li>
-						<li class="	fragment">Qualitative effects are captured with biased incremental speaker</li>	
-						<span class="fragment">$\Rightarrow$ Is incremental listener not needed?</span><br/>
-						<span class="fragment">$\Rightarrow$ What's the relation to previous computational accounts of <font class="sc">subjectivity</font> (<font size="6">"random contexts"</font>)? </span>
-						<li class="fragment">Are gradable dimension adjectives informative because they communicate extreme values? </li>
+						<li class="	fragment">Both Qualitative and Quantitative effects are captured with biased incremental speaker</li>	
+						<li class="fragment">With Grid Search like exploration, we found Beta as sample distribution and logit as link function account best for slider values </li>
 					</ul>						
+				</section>
+
+				<section>
+					<h3>Another production experiment</h3>
+					<div style="display: flex; justify-content: space-between;" >
+						<div style="flex: 1; text-align: center;">
+							<img data-src="production_blurred.png" width="90%" />
+							<span><font size="6"> blurred distribution </font></span>
+						</div>
+						<div style="flex: 1; text-align: center;">
+							<img data-src="production_sharp.png" width="90%" />
+							<span><font size="6"> sharp distribution </font></span>
+						</div>
+					</div>
+				</section>
+				<section>
+					<ul>Preliminary GLMER analysis reveals:
+						<li>Similiar to slider values, <font class="sc">sharpness</font> increases the preference for subjective-<font class="earl">first</font> ordering in <font class="sc">size-relevant</font> context</li>
+						<li class="	fragment">However, it also increases the preference for color-<font class="earl">first</font> ordering in <font class="sc">color-relevant</font> context</li>	
+						<span class="fragment">Furthermore, it decreases the likelihood of overinformative usage of <em>big</em> in <font class="sc">size-relevant</font> context</span><br/>
+						<span class="fragment">$\Rightarrow$ Generative models needed!</span><br/>
+						<li class="fragment">Are gradable dimension adjectives useful because they communicate extreme values? </li>
+					</ul>	
 				</section>
 				<section>
 					<h2>Next steps</h2>
-					<ul>
-						<li class="fragment">We are currently working on Bayesian data analysis in order to perform  quantitative model comparisons (<font size="6">linking function important</font>).</li>
-						<li class="fragment">We aim to model data from a free production task using the same models.</li>
+					<ul style="font-size: 30px;">
+						<li class="fragment">We want to build a hierarchical model structure to incorporate random effects.</li>
+						<li class="fragment">We aim to generate random contexts, similar to those used in previous simulation-based accounts of subjectivity. Our goal is to further investigate how sequential context updates in our model affect the listener's perspective.</li>
+						<li class="fragment">We aim to model data from a free production task using the silimar model structure.</li>
 						<li class="fragment">We want to take steps towards a general model of interpretation based on truly incremental semantics (e.g. Bott &amp; Sternefeld, 2017).
 					</ul>
 				</section>
