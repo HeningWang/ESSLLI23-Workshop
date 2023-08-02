@@ -8,7 +8,7 @@
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="dist/theme/white.css">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css">
@@ -28,20 +28,62 @@
 			.col{
 				flex: 1;
 			}
+			.efficient{
+				color: #32a892",
+			}
+			.highlight {
+				font-weight: bold;
+				font-size: 80; /* adjust as needed */
+			}
 		</style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section  data-background-color="#f2f0eb">
+				<section>
 					<h3>A quantitative exploration of adjective ordering preferences with an incremental Rational Speech Act model</h1>
 					Hening Wang &amp; Fabian Schlotterbeck <br/>
 					<!-- University of Tübingen -->
 					<img data-src="UT_WBMW_Rot_RGB_01.png" height="100" />
 					<br/><br/>
 					
-					<b>Presentation at ESSLLI 2023 Pros &amp; Comps Workshop</b><br/>
+					<b>ESSLLI 2023 Pros &amp; Comps Workshop</b><br/>
 					Ljubljana, Slovenia, 2. Aug. 2023<br/>
+				</section>
+				<section>
+					<h3>Outline</h3>
+					<ol style="font-size: 25px; text-align: left; margin-left: 100; padding-left: 100;">
+						<li>Introduction
+							<ol>
+								<li>Theoretical Background</li>
+								<li>Motivation</li>
+								<li>Research Question</li>
+							</ol>
+						</li>
+						<li>Experiment: Preference Ratings
+							<ol>
+								<li>Design</li>
+								<li>Results</li>
+								<li>Discussion</li>
+							</ol>
+						</li>
+						<li>Computational Model
+							<ol>
+								<li>Rational Speech Act (RSA) framework</li>
+								<li>Previous Models</li>
+								<li>A Fully Incremental RSA Model</li>
+								<li>Qualitative Results</li>
+							</ol>
+						</li>
+						<li> Model Implementation 
+							<ol>
+								<li>Model Specifications</li>
+								<li>Inference</li>
+								<li>Quantitative Results</li>
+							</ol>
+						</li>
+						<li>General Discussion</li>
+					</ol>
 				</section>
 				<section>
 					<h1>Introduction</h1>
@@ -68,7 +110,7 @@
 					<ul>
 						<li class="fragment fade-down">Semantic hierarchies (<font size="5">e.g. Dixon, 1982</font>)</li>
 						<li class="fragment fade-right">Syntactic mapping (<font size="5">e.g. Cinque, 1993</font>)</li>
-						<li class="fragment fade-left">Psycholinguistic explanations  (<font size="5">e.g. Martin, 1969; Whorf, 1945</font>)</li>
+						<li class="fragment fade-left">Psycholinguistic explanations: Absoluteness (<font size="5">e.g. Martin, 1969 </font>) or Inherentness (<font size="5">e.g. Whorf, 1945</font>)</li>
 					</ul>
                 <p class="fragment fade-up">
 					We focus on <b>two recent hypotheses</b> with <b>experimental support</b> and common, <b>rationality-based</b> theoretical motivation<!--<br/>-->
@@ -76,7 +118,7 @@
 				</p>
 				</section>
 				<section>
-					<h1>Hypotheses &amp; questions</h1>
+					<h1>Motivation</h1>
 				</section>
 				<section>
 					<section>
@@ -108,121 +150,120 @@
 							are preferred <font class="earl"><b>earlier in the linear sequence.</b></font>
 							(<font size="5">Fukumura, 2019</font>).
 						</p>
-						<ul>
+						<ul style="font-size: 30px;"">
 							<li class="fragment fade-up">
 								<b>Explanation</b>: <font color="#32a892"><b>More efficient</b></font>
 								expressions are produced <font class="earl"><b>earlier in the linear sequence</b></font>
 								to maximize informativity. 
 							</li>
-							<li class="fragment">Adjectives have maximal discriminatory strength in a given context if they single out a referent perfectly.</li>
+							<li class="fragment"> It can be defined as $\frac{1}{|[\![w]\!]^c|}$ (<font size="5">cf. Frank &amp; Goodman, 2012</font>) or,
+								more generally, $P(r|w; c)$</li>
+							<li class="fragment"> Moreover, more discriminatory adjectives are considered being more salient and accessible in a given context. </li>
 						</ul> 
 					</section>
-					<section>
-						The discriminatory strength of a word  $w$ (in some context $c$) can be defined as $\frac{1}{|[\![w]\!]^c|}$ (<font size="5">cf. Frank &amp; Goodman, 2012</font>) or,
-						more generally, $P(r|w; c)$, where $r$ is the intended referent.
-					</section>
-					<section>
-						More discriminatory adjectives are not only considered more informative
-						but may also be more salient and accessible in a given context.
-					</section>
 				</section>
 				<section>
-					<section>
-						<h2 class="r-fit-text">Comparing the two hypotheses</h2>
-						<ul>
-							<li>Both are based on <font color="#32a892">efficient communication.</font></li>
-							<li>Both assume <em>early</em> use of informative expressions.</li>
-							<li class="fragment">However, due to different perspectives (<font size="6">listener vs. speaker</font>) <em>early</em> means different things
-								(<font size="6"><font class="hear">close to</font> vs. <font class="earl">far from</font>
-								noun in prenominal modification</font>).</li>	
-						</ul>
-					</section>
-					<section>
-						<h2 class="r-fit-text">Different perspectives taken</h2>
-						<div class="container fragment fade-left">
+					<h2 class="r-fit-text">Comparing the two hypotheses</h2>
+					<ul>
+						<li>Both are based on <font color="#32a892">efficient communication.</font></li>
+						<li>Both assume <em>early</em> use of informative expressions.</li>	
+					</ul>
+					<h3 class="fragment fade-up"> However...
+				</section>
+				<section>
+					<h2 class="r-fit-text">Different perspectives taken</h2>
+					<div class="container fragment fade-left">
 
-							<div class="col" class="earl">
-							<font class="earl">Speaker who describes...</font>
+						<div class="col" class="earl">
+						<font class="earl">Speaker who describes...</font>
+						</div>
+						
+						<div class="col">
+						<font class="hear">Listener who identifies...</font>
+						</div>
+					</div>
+					<span>...an intended referent...</span>
+					<div class="container fragment fade-right">
+						<div class="col">
+							...<font class="earl">incrementally</font>...
+						</div>
+						
+						<div class="col">
+							...<font class="hear">sequentially</font>...
+						</div>
+					</div>
+					<span class="fragment fade-up">...based on...</span>
+					<div class="container fragment fade-up">
+
+							<div class="col">
+								...<font class="earl">linear sequence.</font>
 							</div>
 							
 							<div class="col">
-							<font class="hear">Listener who identifies...</font>
+								...<font class="hear">hierarchical structure.</font>
 							</div>
 						</div>
-						<span>...an intended referent...</span>
-						<div class="container fragment fade-right">
-							<div class="col">
-								...<font class="earl">incrementally</font>...
-							</div>
-							
-							<div class="col">
-								...<font class="hear">sequentially</font>...
-							</div>
-						</div>
-						<span class="fragment fade-up">...based on...</span>
-						<div class="container fragment fade-up">
+				</section>
 
-								<div class="col">
-									...<font class="earl">linear sequence.</font>
-								</div>
-								
-								<div class="col">
-									...<font class="hear">hierarchical structure.</font>
-								</div>
-							</div>
-					</section>
-					<section>
-							<h2 class="r-fit-text">Can the two perspectives be combined?</h2>
+				<section>
+					<h2 class="r-fit-text">Comparing the two hypotheses</h2>
+					<ul>
+						<li style="color: #808080">Both are based on efficient communication.</li>
+						<li style="color: #808080;">Both assume <em>early</em> use of informative expressions.</li>
+						<li>Due to different perspectives (<font size="6">listener vs. speaker</font>) <em>early</em> means different things
+							(<font size="6"><font class="hear">close to</font> vs. <font class="earl">far from</font>
+							noun in prenominal modification</font>).</li>	
+					</ul>
+				</section>
+				<section>
+					<h2 class="r-fit-text">Can the two perspectives be combined?</h2>
+					<ul>
+						<li>
+							<font class="sc"><b>discriminatory strength</b></font> was not tested in the presence of subjectivity gradients.
+						</li>
+						<li>
+							<font class="sc"><b>Subjectivity</b></font> was not tested in a referential task.
+						</li>
+						<li>
+							Predictions of <font class="sc"><b>subjectivity</b></font> regarding choice of referring expressions are indirect:
 							<ul>
-								<li>
-									<font class="sc"><b>discriminatory strength</b></font> was not tested in the presence of subjectivity gradients.
-								</li>
-								<li>
-									<font class="sc"><b>Subjectivity</b></font> was not tested in a referential task.
-								</li>
-								<li>
-									Predictions of <font class="sc"><b>subjectivity</b></font> regarding choice of referring expressions are indirect:
-									<ul>
-										<li><font size="5">Some instances of inefficient communication may suffice
-											to drive conventionalization.</font></li>
-										<li><font size="5">Such instances my be restricted to certain readings of multi-adjective sequences, involving
-											sequentially intersective context updates (cf. Franke et al. 2019). </font></li>
-										</ul>
-								</li>
-								<li>
-									Nevertheless, <font class="sc"><b>subjectivity</b></font> would be challenged by 'opposite
-									adaptation' in an referential task
-								</li>
-							</ul>							 
-						</section>		
+								<li><font size="5">Some instances of inefficient communication may suffice
+									to drive conventionalization.</font></li>
+								<li><font size="5">Such instances my be restricted to certain readings of multi-adjective sequences, involving
+									sequentially intersective context updates (cf. Franke et al. 2019). </font></li>
+								</ul>
+						</li>
+						<li>
+							Nevertheless, <font class="sc"><b>subjectivity</b></font> would be challenged by 'opposite
+							adaptation' in an referential task
+						</li>
+					</ul>							 
+				</section>	
+				<section>
+					<h3>Main empirical question</h3>
+					<p>What happens if the two hypotheses stand in direct <font size="8";><strong>conflict</strong></font> in referential visual context?</p>
+					<p class="fragment"><font size="6">An example would be a context where a less subjective adjective
+						discriminates more strongly between potential referents.</font></p>
 				</section>
 				<section>
-					<section>
-						<h2>Main empirical question</h2>
-						<p>What happens if the two hypotheses stand in direct conflict?</p>
-						<p class="fragment"><font size="6">An example would be a context where a less subjective adjective
-							discriminates more strongly between potential referents.</font></p>
-					</section>
-					<section>
-						<h2 class="r-fit-text">direct conflict between hypotheses</h2>
-						<img data-src="https://www.lingexp.uni-tuebingen.de/b1/huashan/pictures/l1pic1zrdc.svg" height="380" />
-						<ol start="2">
-							<li>
-								<ol>
-									<li type="a">big blue star</li>
-									<li type="a">blue big star</font></li>
-								</ol>
-			
-							</li>
-						</ol>
-					</section>
+					<h2 class="r-fit-text">Direct conflict between hypotheses</h2>
+					<img data-src="https://www.lingexp.uni-tuebingen.de/b1/huashan/pictures/l1pic1zrdc.svg" height="380" />
+					<ol start="2">
+						<li>
+							<ol>
+								<li type="a">big blue star</li>
+								<li type="a">blue big star</font></li>
+							</ol>
+		
+						</li>
+					</ol>
 				</section>
 				<section>
 					<h1>Experiment</h1>
 				</section>
 				<section>
 					<section>
-						<h2 class="r-fit-text">Web-based Experiment: preference ratings</h2>
+						<h2 class="r-fit-text">Web-based Experiment: Preference Ratings</h2>
 						<img data-src="experimentsitem1.png" height="420" />
 					</section> 
 					<section>
@@ -248,7 +289,7 @@
 									</li>
 								</ol> 		
 							</li>
-							<li class = "fragment">
+							<li style="color: #808080">
 								Between factor <!-- (<font size="6">controlling 'contextual subjectivity'</font>): -->
 								<ol start="3">
 									<li><font class="sc">Size distribution</font> of objects<br/>
@@ -261,6 +302,7 @@
 					<section>
 						brdc &ndash; blurred<br/>
 						<img data-src="l4pic4brdc.svg" height="320" />
+						<p style="font-size: 26px;"> Scripts for generating these items are modified on the scirpt Generating Dot Arrays for Psycholinguistic Experiments by Shane Steinert-Threlkeld using pycairo 1.15.10</p>
 					</section>
 					<section>
 						frdc &ndash; blurred<br/>
@@ -271,9 +313,42 @@
 						<img data-src="l4pic4zrdc.svg" height="320" />
 					</section>
 					<section>
-						Large objects had sizes of $9$ or $10$ (in a somewhat arbitrary unit). Sizes of small objects were
-						sampled from $[1,6]$ in <em>blurred</em> <font class="sc">distributions</font>
-						and from $[1,3]$ in <em>sharp</em> <font class="sc">distributions</font>. 
+							<h2>Mixed design</h2>
+							<ul>
+								<li style="color: #808080;">
+									Within factors:
+									<ol>
+										<li><font class="sc">combination</font> of adjectives from different semantic classes<br/>
+											<font size="6">(2 levels: <em>dimension &amp; color/shape</em> versus <em>color &amp; shape</em>)</font></li>
+										<li><font class="sc">relevance</font> of the corresponding properties for reference resolution<br/>
+											(<font size="6">3 levels: <em>first</em>, <em>second</em> or <em>both</em> properties relevant</font>)
+										</li>
+									</ol> 		
+								</li>
+								<li>
+									Between factor <!-- (<font size="6">controlling 'contextual subjectivity'</font>): -->
+									<ol start="3">
+										<li><font class="sc">Size distribution</font> of objects<br/>
+											(<font size="6">2 levels: <em>sharp</em> vs. <em>blurred</em>; controlling 'contextual subjectivity'
+										</font>)</li>
+									</ol>
+								</li>
+							</ul>
+					</section>
+					<section>
+						<p><font size="6">Large objects of sizes $9$ or $10$ (in a somewhat arbitrary unit).</font></p>
+							<div style="display: flex; justify-content: space-between;" >
+								<div style="flex: 1; text-align: center;">
+									<img data-src="dist_blurred.png" width="90%" />
+									<ul><span><font size="6">Blurred <font class="sc">size distribution</font></font></span>
+										<li><font size="6">Small objects of sizes: $[1,6]$</font></li></ul>
+								</div>
+								<div style="flex: 1; text-align: center;">
+									<img data-src="dist_sharp.png" width="90%" />
+									<ul><span><font size="6">Sharp <font class="sc">size distribution</font></font></span>
+										<li><font size="6">Small objects of sizes: $[1,3]$</font></li></ul>
+								</div>
+							</div>
 					</section>
 					<section>
 						brdc &ndash; sharp<br/>
@@ -298,37 +373,38 @@
 					<h2>Predictions</h2>
 					<p>Preference for...</p>
 					<ul>
-						<li class="fragment fade-left">subjective-<font class="earl">first</font> orders (<font class="sc" size="6">subjectivity</font>)</li>
+						<li class="fragment fade-left">size-<font class="earl">first</font> orders if they are present in the <font class="earl">combination</font> (<font class="sc" size="6">subjectivity</font>)</li>
 						<li class="fragment fade-right">orders with contextually more discriminatory adjectives
 							<font class="earl">first</font> (<font class="sc" size="6">discriminatory strength</font>)</li>
 					</ul>
 					<p class="fragment fade-up">Reduced preference for...</p>
 					<ul>
 						<li class="fragment fade-up"><em>big</em>-<font class="earl">first</font> orders in <em>sharp</em> distributions,
-							where <em>big</em> is effectively non-subjective (<font size="6">derived from <font class="sc">subjectivity</font>
+							where size is effectively less-subjective (<font size="6">derived from <font class="sc">subjectivity</font>
 							but potentially in conflict with <font class="sc">discriminatory strength</font></font>)</li>
 					</ul>
 				</section>
-				<section data-background="#dddddd" data-auto-animate>
+				<section>
 					<h2>Results</h2>
-					<img data-src="exp_plot.png" align="top" height="450" />
+					<img data-src="exp_plot.png" align="top" height="440" />
 					<ul>
 						<li><font size="6">Preference for orders with contextually more discriminatory adjectives <font class="earl">first</font></font>
 							(<font size="5">as expected</font>)</li>	
 					</ul>
 				</section>
-				<section data-background="#dddddd" data-auto-animate>
+				<section>
 					<h2>Results</h2>
-					<img data-src="exp_plot.png" align="top" height="450" />
+					<img data-src="exp_plot.png" align="top" height="440" /></br>
 					<ul>
-						<li><font size="6">Preference for subjective-<font class="earl">first</font> orders</font> <br/>(<font size="5">as expected		</font>)</li> -->
+						<li><font size="6">Preference for size-<font class="earl">first</font> orders</font> <br/>(<font size="5">as expected</font>)</li>
+
 					</ul>
 				</section>
-					<section data-background="#dddddd" data-auto-animate>
+					<section>
 					<h2>Results</h2>
-					<img data-src="exp_plot.png" align="top" height="450" />
+					<img data-src="exp_plot.png" align="top" height="440" />
 					<ul>
-						<li><font size="6">In <em>big-relevant</em> contexts with <em>sharp</em> <font class="sc">distribution</font>, preference for <em>tall</em>-<font class="earl">first</font> orders <b>increased</b> &ndash;
+						<li><font size="6">In <em>big-relevant</em> contexts with <em>sharp</em> <font class="sc">distribution</font>, preference for size-<font class="earl">first</font> orders <b>increased</b> &ndash;
 							<b>contrary to prediction from <font class="sc">subjectivity</font></font></b></ul>
 				</section>
 				<section>
@@ -344,69 +420,158 @@
 					</ul>
 				</section>
 				<section>
-					<h1>Computational Model</h1>
+					<h2>Computational Model</h2>
 				</section>
 				<section>
-					<section>
-						<h2 class="r-fit-text">Phenomena we want to model</h2>
-						<h3 class="r-fit-text">in RSA framework (building on previous work)</h3>
+					<h2 class="r-fit-text">Phenomena we want to model</h2>
 						<ul>
-							<li class="fragment">Redundancy (<font size="6">calls for 'continuous' semantics;</font> <font size="5">Degen et al. 2020</font>)</li>
-							<li class="fragment">Ordering preferences<br/> (<font size="6">necessitate sequential restriction or incrementality</font>)</li>
-							<ul>
-								<li class="fragment"><font class="sc">Subjectivity</font><br/> (<font size="6">suggests listener perspective</font>)</li>
-								<li class="fragment"><font class="sc">Discriminatory strength</font><br/> (<font size="6">suggests speaker perspective</font>)</li>	
+							<li class="fragment"><font class="sc">Subjectivity</font><br/> (<font size="6">suggests<font class="hear"> listener </font>perspective</font>)</li>
+							<li class="fragment"><font class="sc">Discriminatory strength</font><br/> (<font size="6">suggests<font class="earl"> speaker</font>  perspective</font>)</li>	
+						</ul>
+				</section>
+				<section>
+					<h2 class="r-fit-text"> Rational Speech Act (RSA) Framework (Frank &amp; Goodman, 2012)</h2>
+					<div style="display: flex; justify-content: space-between;" >
+						<div style="flex: 1; text-align: center;">
+							<ul style="font-size: 28px;">
+								<li class="fragment">Literal listener infers the likelihood of an intended referent $r$ given utterances $u$: 
+								<ul class="fragment">	
+									<li class="fragment"> by applying the literal meaning of $u$ on $r$, $[\![u]\!](r)$ </li>
+									<li class="fragment"> by combining prior expectations about $r$ P(r)</li>	
+								</ul>
+								<p class="fragment"> $L_0(r|u) \propto [\![u]\!](r) \cdot P(r)$</p>
+								</li>
 							</ul>
-						</ul>
+						</div>
+						<div style="flex: 1; text-align: center;">
+							<ul style="font-size: 28px;">
+								<li class="fragment">Pragmatic speaker infers the likelihood of an intended utterance $u$ given referents $r$: 
+								<ul class="fragment">	
+									<li class="fragment"> by maximumly reasoning about the literal speaker: $\log L_0(r|u)$ </li>
+									<li class="fragment"> by minimumly combining cost of producing an utterance $u$: $C(u)$</li>
+									<li class="fragment"> by utilizing soft-max function and rationality parameter $\alpha$ </li>		
+								</ul>
+								
+								</li>
+							</ul>
+						</div>
+					</div>
+					<p class="fragment" style="font-size: 28px;"> $S_1(u|r) \propto \exp(\alpha \cdot (\log L_0(r|u) - C(u)))$</p>
+				</section>
+				<section>
+					<h2 class="r-fit-text">Limitation of applying standard RSA on our empircal data and some previous models</h2>
+					<ul style="font-size: 30px;">
+						<li class="fragment">Insensitive to <font class="highlight">overinformativeness</font> (e.g. in size-relevant context)</li>
+							<span class="fragment"> If two utterances are both true, speaker will always prefer the shorter one due to the cost term</span></br>
+							<span class="fragment">$\Rightarrow$ Calls for a continous semantic (cf. Degen et al. 2020)</span>
+							<li class="fragment">Insensitive to <font class="highlight">order</font></li>
+							<span class="fragment"> If two utterances are both true (i.e. $[\![u_{A}]\!](r) = [\![u_{B}]\!](r)$), their order in computation does not matter due to the law of commutativity</span></br>
+							<span class="fragment">$\Rightarrow$ Calls for sequential context update & context-dependet semantics (<font size="5"> cf. Simonic, 2018; Scontras et al., 2019;
+								Franke et al., 2019</font>) </span>
+							<li class="fragment">Insensitive to <font class="highlight"> unfinished, word-level interpretation</font></li>
+							<span class="fragment"> Both speaker and listener are based on a finished, utterance-level lexicon.</span></br>
+							<span class="fragment">$\Rightarrow$ Calls for incrementality (<font size="5"> cf. Cohn-Gordon et al., 2019; Waldon &amp; Degen, 2021; Yu, Waldon &amp; Degen, 2023</font>) </span>
+					</ul>
+				</section>
+
+
+				<section data-auto-animate>
+					<h2 class="r-fit-text">Sequential Context Update</h2>
+					<div style="display: flex; justify-content: space-between; margin-left: -100px;">
+						<img data-src="big_white_bear.jpeg" height="300" />
+						<img data-src="big_white_bear.jpeg" height="150" />
+						<img data-src="brown_bear.jpeg" height="150" />
+						<img data-src="brown_bear.jpeg" height="150" />
+						<img data-src="11.avif" height="150" />
+					</div>
+				</section>
+				<section data-auto-animate>
+					<h2 class="r-fit-text">Sequential Context Update: bear</h2>
+					<div style="display: flex; justify-content: space-between;">
+						<img data-src="big_white_bear.jpeg" height="300" />
+						<img data-src="big_white_bear.jpeg" height="150" />
+						<img data-src="brown_bear.jpeg" height="150" />
+						<img data-src="brown_bear.jpeg" height="150" />
+					</div>
+				</section>
+				<section data-auto-animate>
+					<h2 class="r-fit-text">Sequential Context Update: white bear</h2>
+					<div style="display: flex; justify-content: space-between;">
+						<img data-src="big_white_bear.jpeg" height="300" />
+						<img data-src="big_white_bear.jpeg" height="150" />
+				</section>
+				<section data-auto-animate>
+					<h2 class="r-fit-text">Sequential Context Update: big white bear</h2>
+					<div style="display: flex; justify-content: space-between;">
+						<img data-src="big_white_bear.jpeg" height="300" />
+				</section>
+
+				<section>
+					<h2>Ideas for an incremental RSA model </h2>
+					<p><font size="6"> (Schlotterbeck & Wang 2023) </font></p>
+					<ul>
+						<li class="fragment">Incremental listener interprets from $\underleftarrow{\textrm{right to left}}$ (<font size="6">i.e. restricts potential referents
+							sequentially, in accordance with preferred interpretation</font>).
+						</li>
+						<li class="fragment">Incremental speaker maximizes informativity at each word from $\underrightarrow{\textrm{left to right}}$.</li>
+					</ul>
+				</section>
+				<section data-auto-animate>
+					<h2>Illustration: two words example (i = 2)</h2>
+					<p>$S(\empty,i = 2)$</p>
+				</section>
+				<section data-auto-animate>
+					<p>$S(\empty,i = i - 1 = 1)$</p>
+				</section>
+				<section data-auto-animate>
+					<p>$S(w_1,i = 1)$</p> 
+					<p>where word $w$ comes from probablistic language models, here a simple case: </p>
+					<p>$B \rightarrow aA$</p>
+					<p>$A \rightarrow bB$</p>
+					<p>$A \rightarrow \empty$</p>
+				</section>
+				<section data-auto-animate>
+					<p>$L(w_1,i = 1) \propto [\![w_1]\!]^{supp}(r) \cdot P(w_1)$ </p>
+					<p>where $supp$ refers to the support of P(r) (i.e. the current context)</p>
+				</section>
+				<section data-auto-animate>
+					<p class="r-fit-text">$S(w_1,i = 1) \propto \exp(\alpha \cdot (\log L(r|w_1) - C(w_1)))$</p>
+				</section>
+				<section data-auto-animate>
+					<p>$S(w_1,i = 1 + 1 = 2)$</p>
+				</section>
+				<section data-auto-animate>
+					<p>$S(w_2 \; w_1,i = 2)$</p> 
+					<p> Again, $w_2$ comes from a LM </p>
+				</section>
+				<section data-auto-animate>
+					<section data-auto-animate>
+						<p>$L(w_2 \; w_1,i = 2)$</p>
 					</section>
+					<section data-auto-animate>
+						<p>$L(w_1,i = 2 - 1 = 1)$</p>
+					</section>
+					<section data-auto-animate>
+						<p>$L(w_1,i= 1) (w_1,i = 1) \propto [\![w_1]\!]^{supp}(r) \cdot P(w_1)$</p>
+					</section>
+					<section data-auto-animate>
+						<p>$L(w_2 \; w_1,i= 1 + 1 = 2)$</p>
+					</section>
+					<section data-auto-animate>
+						<p class="r-fit-text">$L(w_2 \; w_1,i= 2) \propto [\![w_1]\!]^{supp(L_2(w_1,i= 1))}(r) \cdot L(w_1,i= 1)$ </p>
+					</section>
+				</section>
+				<section data-auto-animate>
+					<p class="r-fit-text">$S(w_2 \; w_1,i = 2) \propto \exp(\alpha \cdot (\log L(w_2 \; w_1,i= 2) - C(S(w_1,i = 1))))$</p>
+					<p ><font size="3"> Notice $C(w)$ and $P(w)$ are interchangeable (for proof, see Scontras et al. 2021, Appendix III)</font></p>
+				</section>
+				
+				<section>
 					<section>
-						<h2>Previous modeling work</h2>
-						<ul>
-							<li>Redundancy (<font size="5">e.g. Degen et al. 2020</font>)</li>
-							<li>Subjectivity (<font size="5">Simonic, 2018; Scontras et al., 2019;
-								Franke et al., 2019</font>)
-							</li>
-							<li>
-								Incremental interpretation in RSA<br/> (<font size="5">Cohn-Gordon et al., 2019; Waldon &amp; Degen, 2021; Yu, Waldon &amp; Degen, 2023</font>)
-							</li>
-						</ul>
-					</section>
-					<section>
-						<ul>
-							<li>
-								<font size="6">From listener perspective, ordering preferences
-								require context-dependent meanings (because of commutativity)</font>
-							</li>
-							<li class="fragment">
-								<font size="6">Lexical meanings:</font><br/>
-								<font size="5">
-									\[\begin{aligned}
-									[\![big]\!]^C &amp;=  \lambda x. size(x) > max(C) - \frac{k}{100} * (max(C) - min(C))\\  
-									[\![blue]\!]^C &amp;:  \textrm{coinflip}\\   	
-									\end{aligned}\]	
-								</font>
-							</li>
-						</ul>
-					</section>
-				</section>
-				<section>
-					<p> Perhaps here a brief introduction to the standard RSA? </p>
-				</section>
-				<section>
-				<h2>Idea for incremental model</h2>
-				<ul>
-					<li class="fragment">Incremental listener interprets from $\underleftarrow{\textrm{right to left}}$ (<font size="6">i.e. restricts potential referents
-						sequentially, in accordance with preferred interpretation</font>).
-					</li>
-					<li class="fragment">Incremental speaker maximizes informativity at each word from $\underrightarrow{\textrm{left to right}}$.</li>
-				</ul>
-				</section>
-				<section>
-					<section data-background="#dddddd">
-						<h2>Fully incremental model</h2>
+						<h2>Generalisation for fully incrementality</h2>
 						<img data-src="inc_model_corrected.png" width="100%" />
 					</section>
-					<section data-background="#dddddd">
+					<section>
 						<font size="6">
 							<p>In all definitions above:</p>
 							<ul>
@@ -424,41 +589,100 @@
 							<p>In addition we used a bias in the prior $P(w_{1,n})$ of $S^{inc\_utt}_1$.</p>
 						</font>
 					</section>
-				</section>	
-				<section data-background="#dddddd">
-					<h3>Prior model parameter distributions and model specifications</h2>
+				</section>
+				<section>
+					<section>
+						<h2>Qualitative results</h2>
+						<img data-src="p_bias2_a1_b1.png" width="45%" />
+						<ul><li><font size="6">Qualitative effects captured with biased incremental speaker</font></li></ul>
+					</section>
+					<section>
+						<p>We got there in three steps...</p>
+					</section>
+					<section data-auto-animate>
+						<h2>Qualitative results</h2>
+						<img data-src="p_bias1_a5_b5.png" width="45%" /><br/>
+						<ul><li><font size="6">Interaction might be there</font></li></ul>
+					</section>
+					<section data-auto-animate>
+						<h2>Qualitative results</h2>
+						<img data-src="p_bias1_a5_b5.png" width="45%" /><br/>
+						<font size="6">$\Rightarrow$ decrease rationality parameter $\alpha$ to move away from ceiling</font>
+					</section>
+					<section data-auto-animate>
+						<h2>Qualitative results</h2>
+						<img data-src="p_bias1_a1_b1.png" width="45%" /><br/>
+						<ul><li><font size="6">Better, but no preference for subjective-first orders</font></li></ul>
+					</section>
+					<section data-auto-animate>
+						<h2>Qualitative results on <em>dimension_X data</em></h2>
+						<img data-src="p_bias1_a1_b1.png" width="45%" /><br/>
+						<font size="6">$\Rightarrow$ introduce <em>bias</em></font>
+					</section>
+					<section data-auto-animate>
+						<h2>Qualitative results</h2>
+						<img data-src="p_bias2_a1_b1.png" width="45%" />
+						<ul><li><font size="6">Qualitative effects captured with biased incremental speaker</font></li></ul>
+					</section>	
+				</section>
+				<section>
+					<h2>Discussion</h2>
+					<ul>
+						<li class="	fragment">Qualitative effects are captured with biased incremental speaker</li>	
+						<span class="fragment">$\Rightarrow$ Is incremental listener not needed?</span><br/>
+						<li class="fragment"> <b> We need quantitative analysis to address this question! </b> </li>
+					</ul>						
+				</section>
+				<section>
+					<h1>Model Implementation</h1>					
+				</section>
+				<section>
+					<h2 class="r-fit-text">Meaning functions</h1>
+					<p>For color adjectives:</p>
+					\[\begin{aligned}
+					[\![blue]\!] = \lambda x. \begin{cases}
+					\epsilon& \text{if x is blue},\\
+					1 - \epsilon& \text{if x is not blue}
+					\end{cases}
+  					\end{aligned} \]
+					<p>where $\epsilon$ relates to the model parameter: color_semvalue$ </p>					
+				</section>
+				<section>
+					<h2 class="r-fit-text">Meaning functions</h1>
+					<p style="font-size: 0.8em;" class="fragment fade-left">For size adjectives: $k$%-semantics (Schmidt et al. 2009, Cremers et al. 2022)</p>
+					<p style="font-size: 0.8em;" class="fragment fade-left">Tall iff its height exceeds that <b>threshold</b> of $k$% of the objects in the context $supp$</p>
+					<div style="font-size: 0.6em;" class="fragment fade-left">
+						\[\begin{aligned}
+						[\![big]\!]^{supp} = \lambda x. size(x) > max(supp) - k * (max(supp) - min(supp))
+						\end{aligned} \]
+					</div>	
+					<p style="font-size: 0.8em;" class="fragment fade-left">Deviation from the ground truth: <b>"Perceptual Blur"</b> according to the Weber-Fechner ($wf$) law <font size="4">(similar as implemented in van Tiel et al. 2021)</font></p>
+									
+				</section>
+				<section>
+					<h3>Model specifications</h2>
 						<div style="display: flex; justify-content: space-between;" >
 							<div style="flex: 1; text-align: center;">
-								<ul style="font-size: 20px;">
+								<ul style="font-size: 0.5em;">
 									
 									<li>
-										$color\_semvalue \sim Uniform(0,1)$
-									</li>
-									
-									<li>
-										$k \sim Uniform(0,1)$
-									</li>
-									<li>
-										$wf \sim Uniform(0,1)$
-									</li>
-									<li>
-										$alpha \sim HalfNormal(5)$
-									</li>
-									<li>
-										$bias \sim HalfNormal(5)$
+										$color\_semvalue$, $k$, $wf$ $\sim Uniform(0,1)$ relate to effects from the <font class = "hear">listener</font> perspective 
 									</li>
 									
 									<li>
-										$steepness \sim Uniform(0,1)$
+										$gamma$ (i.e. rationality), $bias$ (i.e. P(w)) $\sim HalfNormal(5)$ relate to effects from the <font class = "earl">speaker</font> perspective 
+									</li>
+									
+									<li>
+										$steepness \sim Uniform(0,1)$ relates to link function mapping predicted likelihood onto slider value
 									</li>
 									<li>
-										$sigma \sim Uniform(0,0.10)$  
+										$sigma$ (i.e. standard deviation) $\sim Uniform(0,0.10)$ if sample distribution is $TruncatedNormal$
 									</li>
-									<span>if sample distribution is $TruncatedNormal$($loc$ = predicted likelihood, $scale$ = $sigma$, $lower$ = $0$, $upper$ = $1$)</span><br/>
 									<li>
-										$v \sim Uniform(0,2)$
-									</li>
-									<span>if sample distribution is $Beta$($loc$ = predicted likelihood, $concentration$ = $v$)</span><br/>
+										$v$ (i.e. concentration) $\sim Uniform(0,2)$ if sample distribution is $Beta$
+									</li><br/>
+									<span>Sample distribution introduces model residuals.</span><br/>
 									
 								</ul>
 							</div>
@@ -467,117 +691,76 @@
 							</div>
 						</div>
 				</section>
-				<section data-background="#dddddd">
-					<h3>Model selection methods: Grid Search like</h2>
+				<section>
+					<h3>Inference</h2>
+					<ul>We use NUTS sampler (numpyro, Phan et al. 2019, Bingham et al. 2019) to perform MCMC inference:
+						<li class="fragment fade-left">
+							Warum up size: 5000
+						</li>
+						<li class="fragment fade-left">
+							Sample size: 30000
+						</li>
+						<li class="fragment fade-left">
+							In total, $N = 14$ models were trained. (with Avg. runtime of 1.5 hours per model on a single A100)
+						</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Model variants</h2>
+					<ul style="font-size: 26px;">We use a Grid-Search like method to explore model variants:
+						<ul> <b>Search space:</b>
+							<li class="fragment fade-left">
+								<ul> <b>Speaker:</b>
+									<li>incremental</li>
+									<li>global</li>
+								</ul>
+							</li>
+							<li class="fragment fade-left">
+								<ul> <b>Threshold methods of size Adj:</b>
+									<li>context dependent (sampling based)</li>
+									<li>context-independent (support based)</li>
+								</ul>
+							</li>
+							<li class="fragment fade-left">
+								<ul> <b>Sample distribution:</b>
+									<li>$TruncatedNormal$</li>
+									<li>$Beta$</li>
+								</ul>
+							</li>
+							<li class="fragment fade-left">
+								<ul> <b>Link function:</b>
+									<li>logit</li>
+									<li>logistic</li>
+									<li>linear</li>
+									<li>identity</li>
+								</ul>
+							</li>
+						</ul>
+					</ul>
+					
+				</section>
+				<section>
+					<h2>Results: Good model fit</h2>
 					<div style="display: flex; justify-content: space-between;" >
 						<div style="flex: 1; text-align: center;">
-							<ul style="font-size: 30px;"> Search space:
-								<li>
-									Speaker: [incremental, global]
-								</li>
-								<li>
-									Sem. methods of size Adj.: [context dependent (sampling based), fixed (support based)]
-								</li>
-								<li>
-									Sample distribution: [TruncatedNormal, Beta]
-								</li>
-								<li>
-									Link function: [logit, logistic, linear, identity]
-								</li>
-							</ul>
+							<img data-src="empirical_data.png" width="90%" />
+							<ul><span><font size="6">Empirical data</font></span></ul>
 						</div>
 						<div style="flex: 1; text-align: center;">
-							<ul style="font-size: 30px;">Scores:
-								<li>
-									Pearson Correlation Coefficient
-								</li>
-								<li>
-									L2 Error
-								</li>
-								<li>
-									Log Predictive Density (LPD)
-								</li>
+							<img data-src="02_mean_predictions_plot.png" width="90%" />
+							<ul>
+								<span><font size="6">Model predicitons</font></span>
 							</ul>
 						</div>
 					</div>
-					<p style="font-size: 30px;">Parameters for MCMC sampler: num_warmup = 5000, num_samples = 30000 (Aver. Runtime for a single model: about 1h using numpyro and A100)</p>
 				</section>
 				<section>
-					<h3>Results </h3>
-					<table>
-						<thead>
-						  <tr>
-							<th></th>
-							<th>Corr. Coeff.</th>
-							<th>L2</th>
-							<th>LPD</th>
-						  </tr>
-						</thead>
-						<tbody>
-						  <tr>
-							<td>baseline: Global Speaker + f. Semantic</td>
-							<td>0.289</td>
-							<td>0.140</td>
-							<td>-6.991</td>
-						  </tr>
-						  <tr>
-							<td>Global Speaker + c. Semantic</td>
-							<td>0.290</td>
-							<td>0.140</td>
-							<td>-6.991</td>
-						  </tr>
-						  <tr>
-							<td>Inc. Speaker + c. Semantic</td>
-							<td><b>0.299*</b></td>
-							<td><b>0.140*</b></td>
-							<td><b>-6.989*</b></td>
-						  </tr>
-						  <tr>
-							<td>Inc. Speaker + f. Semantic</td>
-							<td>0.299</td>
-							<td>0.140</td>
-							<td>-6.989</td>
-						  </tr>
-						</tbody>
-						</table>
-				</section>
-				<section>
-					<section data-background="#dddddd">
-						<h3>Posterior analysis for the best model</h2>
-						<div style="display: flex; justify-content: space-between;" >
-							<div style="flex: 1; text-align: center;">
-								<img data-src="empirical_data.png" width="90%" />
-								<ul><li><font size="6">Empirical data</font></li></ul>
-							</div>
-							<div style="flex: 1; text-align: center;">
-								<img data-src="07_predictions.png" width="90%" />
-								<ul>
-									<li><font size="6">Aggregated mean posterior predictions from the best model</font></li>
-								</ul>
-							</div>
-						</div>
+					<section>
+						<h3>Correlation plot against empirical data</h2>
+						<img data-src="02_correlation.png" width="100%" />
 					</section>
-					<section data-background="#dddddd">
-						<h3>Correlation plot of the best model</h2>
-						<div style="display: flex; justify-content: space-between;" >
-							<img data-src="07_correlation.png" width="90%" />
-						</div>
-					</section>
-					<section data-background="#dddddd">
-						<h3>Comparing with the baseline model</h2>
-						<div style="display: flex; justify-content: space-between;" >
-							<div style="flex: 1; text-align: center;">
-								<img data-src="07_predictions.png" width="90%" />
-								<ul><li><font size="6">Best model with incremental speaker and context-dependent semantics</font></li></ul>
-							</div>
-							<div style="flex: 1; text-align: center;">
-								<img data-src="14_predictions.png" width="90%" />
-								<ul><li><font size="6">Baseline model with global speaker and fix semantics</font></li></ul>
-							</div>
-						</div>
-					</section>
-					<section data-background="#dddddd">
-						<h3>Posterior model parameter distributions</h2>
+					<section>
+						<h3>Results: Posterior distributions of parameters</h2>
 						<img data-src="07_posteriors.png" width="90%" />
 						<p> <font size="4"> Maximum a posteriori (MAP) and 90% highest density interval (HDI) for each parameters:</font></p>
 						
@@ -596,83 +779,159 @@
 						</div>
 					</section>
 				</section>
+				
+				
 				<section>
-					<h3>Histogram of empirical slider values</h2>
-					<img data-src="histogram.png" width="60%" /> </br>
-					<span>Link function needed?</span>
-				</section>
-				<section>
-					<h3>Comparison of link functions and sample distributions</h2>
-						<table style="margin-left: -100px;">
+					<section>
+						<h3 class="r-fit-text">Comparing predictions of models with different speaker </h3>
+						<div style="display: flex; justify-content: space-between;" >
+							<div style="flex: 1; text-align: center;">
+								<img data-src="02_mean_predictions_plot.png" width="80%" />
+								<ul><li><font size="5">Incremental speaker with a context-dependent size semantic</font></li></ul>
+							</div>
+							<div style="flex: 1; text-align: center;">
+								<img data-src="01_predictions_use.png" width="80%" />
+								<ul><li><font size="5"> Non-incremental speaker with a context-independent size semantic</font></li></ul>
+							</div>
+						</div>
+						<span><b>
+							The non-incremental speaker predicts an interaction effect that contradicts the direction observed in empirical data.</b></span>
+					</section>
+					<section>
+						<h3>Model comparison</h3>
+						<table>
 							<thead>
 							  <tr>
 								<th></th>
-								<th></th>
-								<th>Normal</th>
-								<th></th>
-								<th></th>
-								<th>Beta</th>
-								<th></th>
+								<th>Corr. Coeff.</th>
+								<th>L2</th>
+								<th>LPD</th>
 							  </tr>
 							</thead>
 							<tbody>
 							  <tr>
-								<td></td>
-								<td>Corr. Coeff.</td>
-								<td>L2</td>
-								<td>LPD</td>
-								<td>Corr. Coeff.</td>
-								<td>L2</td>
-								<td>LPD</td>
+								<td>baseline: Global Speaker + f. Semantic</td>
+								<td>0.289</td>
+								<td>0.140</td>
+								<td>-6.991</td>
 							  </tr>
 							  <tr>
-								<td>logit</td>
-								<td>0.299*</td>
-								<td>0.132</td>
-								<td>-15.540*</td>
-								<td>0.298*</td>
-								<td>0.140*</td>
-								<td>-6.989*</td>
+								<td>Global Speaker + c. Semantic</td>
+								<td>0.290</td>
+								<td>0.140</td>
+								<td>-6.991</td>
 							  </tr>
 							  <tr>
-								<td>logistic</td>
-								<td>0.298</td>
-								<td>0.132</td>
-								<td>-15.544</td>
-								<td>0.005</td>
-								<td>0.186</td>
-								<td>-7.080</td>
+								<td>Inc. Speaker + c. Semantic</td>
+								<td><b>0.299*</b></td>
+								<td><b>0.140*</b></td>
+								<td><b>-6.989*</b></td>
 							  </tr>
 							  <tr>
-								<td>linear</td>
-								<td>0.299*</td>
-								<td>0.132</td>
-								<td>-15.542</td>
-								<td>0.295</td>
-								<td>0.145</td>
-								<td>-7.002</td>
-							  </tr>
-							  <tr>
-								<td>identity</td>
-								<td>0.298</td>
-								<td>0.132</td>
-								<td>-15.542</td>
-								<td>0.298*</td>
-								<td>0.140*</td>
-								<td>-6.989*</td>
+								<td>Inc. Speaker + f. Semantic</td>
+								<td>0.299</td>
+								<td>0.140</td>
+								<td>-6.989</td>
 							  </tr>
 							</tbody>
 							</table>
+					</section>
 				</section>
 				<section>
 					<section>
+						<h2 class="r-fit-text">Comparing predictions of models with different sample distribution</h2>
+						<div style="display: flex; justify-content: space-between;" >
+							<div style="flex: 1; text-align: center;">
+								<img data-src="02_mean_predictions_plot.png" width="80%" />
+								<ul><li><font size="5">$TruncatedNormal$ distribution with logit link function </font></li></ul>
+							</div>
+							<div style="flex: 1; text-align: center;">
+								<img data-src="07_predictions.png" width="80%" />
+								<ul><li><font size="5"> $Beta$ distribution with logit link function</font></li></ul>
+							</div>
+						</div>
+						<span><b> The range of predictions made by $Beta$ distribuion does not align with empircal data. </b></span>
+					</section>
+					<section>
+						<h3>Histogram of empirical slider values</h2>
+						<img data-src="histogram.png" width="60%" /> </br>
+						<span>Link function needed?</span>
+					</section>
+					<section>
+						<h3>Comparison of link functions and sample distributions</h2>
+							<table style="margin-left: -100px;">
+								<thead>
+								  <tr>
+									<th></th>
+									<th></th>
+									<th>Normal</th>
+									<th></th>
+									<th></th>
+									<th>Beta</th>
+									<th></th>
+								  </tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<td></td>
+									<td>Corr. Coeff.</td>
+									<td>L2</td>
+									<td>LPD</td>
+									<td>Corr. Coeff.</td>
+									<td>L2</td>
+									<td>LPD</td>
+								  </tr>
+								  <tr>
+									<td>logit</td>
+									<td>0.299*</td>
+									<td>0.132</td>
+									<td>-15.540*</td>
+									<td>0.298*</td>
+									<td>0.140*</td>
+									<td>-6.989*</td>
+								  </tr>
+								  <tr>
+									<td>logistic</td>
+									<td>0.298</td>
+									<td>0.132</td>
+									<td>-15.544</td>
+									<td>0.005</td>
+									<td>0.186</td>
+									<td>-7.080</td>
+								  </tr>
+								  <tr>
+									<td>linear</td>
+									<td>0.299*</td>
+									<td>0.132</td>
+									<td>-15.542</td>
+									<td>0.295</td>
+									<td>0.145</td>
+									<td>-7.002</td>
+								  </tr>
+								  <tr>
+									<td>identity</td>
+									<td>0.298</td>
+									<td>0.132</td>
+									<td>-15.542</td>
+									<td>0.298*</td>
+									<td>0.140*</td>
+									<td>-6.989*</td>
+								  </tr>
+								</tbody>
+								</table>
+					</section>
+				</section>
+				<section>
+					<section data-auto-animate>
 					<h2>Discussion</h2>
 					<ul style="font-size: 30px;">
-						<li class="	fragment">Incremental speaker model based on context dependent size semantics with Beta as sample distribution and logit link function yields the best result</li>
-						<li class="	fragment">Global speaker model generates predicitions opposite to empirical data, but in line with theory predicitons.</li>
-						<li class="	fragment">Account for accurate estimation of aggregated mean and correlation </li>
-						<li class="fragment"> Range of predictions from Beta distribution does not align. </li>
-						<li class="	fragment">Random effects structure needed to account for variances</li>	
+						<li class="	fragment"><b>Incremental speaker model based on context dependent size semantics</b> provides the best model fit for aggregated means.</li>
+						<li class="	fragment">Unlike qualitative results, we observe effects from <font class="hear">listener</font> perspective <b>contrary</b> to empirical data. </li>
+						<span class="fragment"> $\Rightarrow$ However, this is indeed expected from <b>theory predicitons and experimental design</b>.</span>
+						<li class="	fragment">$TruncatedNormal$ distribution provides the <b>right range</b>, but does not align with the pattern of empircal data. </li>
+						<li class="fragment"> $Beta$ distribution may better describe the <b>true underlying distribution</b> of empirical data, but does not provide the right range. </li>
+						<li class="	fragment"><b>Minor</b> differences exist among various link functions.</li>	
+						<li class="	fragment"><b>By participants</b> random effects structure may needed to account for <b>individual variances</b>.</li>	
 					</ul>
 					</section>	
 					<section>
@@ -680,46 +939,70 @@
 						<img data-src="random_effect_small.png" width="70%" /> </br>
 					</section>
 				</section>
-				<section>
-					<h2>General Discussion</h2>
+				<section data-auto-animate>
+					<h3 class="r-fit-text">General Discussion</h2>
 					<ul>
-						<li>The <b>observed contextual adaptation challenges an explanation</b> of <font class="sc">subjectivity</font> 
-							that is <b>based on low communicative efficiency</b> alone.</li>
-						<li class="	fragment">Both Qualitative and Quantitative effects are captured with biased incremental speaker</li>	
-						<li class="fragment">With Grid Search like exploration, we found Beta as sample distribution and logit as link function account best for slider values </li>
-					</ul>						
+					<ul style="font-size: 28px;" class="	fragment">
+						We provided results from a preference rating experiment in visual referential context, which reveal:
+								<li class="	fragment">
+									<b>Both</b> <font class="sc">Subjectivity</font> and <font class="sc">Discriminatory strength</font> contribute to adjective ordering preference as stated in literature.
+								</li>
+								<li class="	fragment">
+									A <b>complex</b> interaction effect necessitates further explanations beyond just relying on communication efficiency, but also some other Psycholinguistic factors like salience or availability.
+								</li>
+							
+					</ul>
+					<ul style="font-size: 28px;" class="	fragment"> We also presented <b>a fully incremental RSA model</b>, and implemented it for quantitative analysis on our empirical data, which reveals: 
+						<li class="	fragment"><b>Incremental speaker with context-dependent size semantic</b> can capture aggregated means <b>very well</b>.</li>
+						<li class="	fragment"><b>Global speaker with context-independent size semantics</b> predicts effects from <font class="hear">listener</font> perspective <b>contrary</b> to empirical data, but in line with <b>a evolutional, stability based explanation</b> for <font class="first">subjective-first</font> ordering. (cf. Scontras et al. 2019, Franke et al. 2019)</li>
+					</ul>
+				</ul>						
+				</section>	
+				<section>
+					<section>
+						<h3 class="r-fit-text">Another experiment: a free production task</h3>
+						<div style="display: flex; justify-content: space-between;" >
+							<div style="flex: 1; text-align: center;">
+								<img data-src="production_blurred.png" width="90%" />
+								<span><font size="6"> blurred </font></span>
+							</div>
+							<div style="flex: 1; text-align: center;">
+								<img data-src="production_sharp.png" width="90%" />
+								<span><font size="6"> sharp </font></span>
+							</div>
+						</div>
+						<ul>
+							Provide better understanding of:
+							<li class="	fragment">Interaction effect</li>
+							<li class="	fragment">Overinformativeness</li>	
+							<span class="fragment">Without explicit link function </span>
+						</ul>	
+					</section>
+					<section>
+						<ul>Preliminary GLMER analysis reveals:
+							<li>Similiar to slider values, <font class="sc">sharpness</font> increases the preference for subjective-<font class="earl">first</font> ordering in <font class="sc">size-relevant</font> context</li>
+							<li class="	fragment">However, it also increases the preference for color-<font class="earl">first</font> ordering in <font class="sc">color-relevant</font> context</li>	
+							<span class="fragment">Furthermore, it decreases the likelihood of overinformative usage of <em>big</em> in <font class="sc">size-relevant</font> context</span><br/>
+							<span class="fragment">$\Rightarrow$ Generative models needed!</span><br/>
+							<li class="fragment">Are gradable dimension adjectives useful because they communicate extreme values? </li>
+						</ul>	
+					</section>
 				</section>
 
-				<section>
-					<h3>Another production experiment</h3>
-					<div style="display: flex; justify-content: space-between;" >
-						<div style="flex: 1; text-align: center;">
-							<img data-src="production_blurred.png" width="90%" />
-							<span><font size="6"> blurred distribution </font></span>
-						</div>
-						<div style="flex: 1; text-align: center;">
-							<img data-src="production_sharp.png" width="90%" />
-							<span><font size="6"> sharp distribution </font></span>
-						</div>
-					</div>
-				</section>
-				<section>
-					<ul>Preliminary GLMER analysis reveals:
-						<li>Similiar to slider values, <font class="sc">sharpness</font> increases the preference for subjective-<font class="earl">first</font> ordering in <font class="sc">size-relevant</font> context</li>
-						<li class="	fragment">However, it also increases the preference for color-<font class="earl">first</font> ordering in <font class="sc">color-relevant</font> context</li>	
-						<span class="fragment">Furthermore, it decreases the likelihood of overinformative usage of <em>big</em> in <font class="sc">size-relevant</font> context</span><br/>
-						<span class="fragment">$\Rightarrow$ Generative models needed!</span><br/>
-						<li class="fragment">Are gradable dimension adjectives useful because they communicate extreme values? </li>
-					</ul>	
-				</section>
 				<section>
 					<h2>Next steps</h2>
 					<ul style="font-size: 30px;">
 						<li class="fragment">We want to build a hierarchical model structure to incorporate random effects.</li>
-						<li class="fragment">We aim to generate random contexts, similar to those used in previous simulation-based accounts of subjectivity. Our goal is to further investigate how sequential context updates in our model affect the listener's perspective.</li>
+						<li class="fragment">We aim to generate random contexts, similar to those used in previous simulation-based accounts of subjectivity. Our goal is to further investigate how sequential context update in our model affect the listener's perspective.</li>
 						<li class="fragment">We aim to model data from a free production task using the silimar model structure.</li>
 						<li class="fragment">We want to take steps towards a general model of interpretation based on truly incremental semantics (e.g. Bott &amp; Sternefeld, 2017).
 					</ul>
+				</section>
+				<section data-auto-animate>
+					<h3 class="r-fit-text">Open questions</h3>
+					<ul style="font-size: 30px;">
+						<li class="	fragment">Given the complex data pattern, to which extend can we derieve evolutional conventionalization from efficieny in referential communication?</li>
+						<li class="	fragment">Are gradable dimension adjectives useful because they communicate <b>extreme</b> values?</li>
 				</section>
 			    <section data-markdown>
 					## Thank you!
@@ -757,6 +1040,7 @@
 		<script src="plugin/markdown/markdown.js"></script>
 		<script src="plugin/highlight/highlight.js"></script>
 		<script src="plugin/math/math.js"></script>
+		<script src="plugin/zoom/zoom.js"></script>
 		<script>
 			// More info about initialization & config:
 			// - https://revealjs.com/initialization/
@@ -765,7 +1049,7 @@
 				hash: true,
                 
 				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealZoom ]
 			}); 
 		</script>
 	</body>     
@@ -799,3 +1083,98 @@
 	<img data-src="p_bias2_a1_b1.png" width="45%" />
 	<ul><li><font size="6">Qualitative effects captured with biased incremental speaker</font></li></ul>
 </section>	
+
+<section data-background="#dddddd">
+	<h3>Model selection methods: Grid Search like</h2>
+	<div style="display: flex; justify-content: space-between;" >
+		<div style="flex: 1; text-align: center;">
+			<ul style="font-size: 30px;"> Search space:
+				<li>
+					Speaker: [incremental, global]
+				</li>
+				<li>
+					Sem. methods of size Adj.: [context dependent (sampling based), fixed (support based)]
+				</li>
+				<li>
+					Sample distribution: [TruncatedNormal, Beta]
+				</li>
+				<li>
+					Link function: [logit, logistic, linear, identity]
+				</li>
+			</ul>
+		</div>
+		<div style="flex: 1; text-align: center;">
+			<ul style="font-size: 30px;">Scores:
+				<li>
+					Pearson Correlation Coefficient
+				</li>
+				<li>
+					L2 Error
+				</li>
+				<li>
+					Log Predictive Density (LPD)
+				</li>
+			</ul>
+		</div>
+	</div>
+	<p style="font-size: 30px;">Parameters for MCMC sampler: num_warmup = 5000, num_samples = 30000 (Aver. Runtime for a single model: about 1h using numpyro and A100)</p>
+</section>
+
+<section>
+	<section data-background="#dddddd">
+		<h3>Posterior analysis for the best model</h2>
+		<div style="display: flex; justify-content: space-between;" >
+			<div style="flex: 1; text-align: center;">
+				<img data-src="empirical_data.png" width="90%" />
+				<ul><li><font size="6">Empirical data</font></li></ul>
+			</div>
+			<div style="flex: 1; text-align: center;">
+				<img data-src="07_predictions.png" width="90%" />
+				<ul>
+					<li><font size="6">Aggregated mean posterior predictions from the best model</font></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+	<section data-background="#dddddd">
+		<h3>Correlation plot of the best model</h2>
+		<div style="display: flex; justify-content: space-between;" >
+			<img data-src="07_10pps_correlation.png" width="90%" />
+		</div>
+	</section>
+	<section data-background="#dddddd">
+		<h3>Comparing with the baseline model</h2>
+		<div style="display: flex; justify-content: space-between;" >
+			<div style="flex: 1; text-align: center;">
+				<img data-src="07_predictions.png" width="90%" />
+				<ul><li><font size="6">Best model with incremental speaker and context-dependent semantics</font></li></ul>
+			</div>
+			<div style="flex: 1; text-align: center;">
+				<img data-src="14_predictions.png" width="90%" />
+				<ul><li><font size="6">Baseline model with global speaker and fix semantics</font></li></ul>
+			</div>
+		</div>
+	</section>
+	<section data-background="#dddddd">
+		<h3>Posterior model parameter distributions</h2>
+		<img data-src="07_posteriors.png" width="90%" />
+		<p> <font size="4"> Maximum a posteriori (MAP) and 90% highest density interval (HDI) for each parameters:</font></p>
+		
+		<div style="display: flex; justify-content: space-between;" >
+			<div style="flex: 1; text-align: center;">
+				<font size="4">bias: MAP = 0.70, HDI = [0.22, 1.07]</font><br/>
+				<font size="4">color semantic value: MAP = 0.95, HDI = [0.94, 0.95]</font><br/>
+				<font size="4">alpha(gamma): MAP = 1.99, HDI = [1.16, 2.71]</font><br/>
+				<font size="4">k: MAP = 0.42, HDI = [0.16, 0.67]</font><br/> 
+			</div>
+			<div style="flex: 1; text-align: center;">
+				<font size="4">v: MAP = 0.38, HDI = [0.36, 0.39]</font><br/>
+				<font size="4">steepness: MAP = 0.52, HDI = [0.12, 0.93]</font><br/>
+				<font size="4">wf: MAP = 0.84, HDI = [0.76, 0.93]</font><br/>
+			</div>
+		</div>
+	</section>
+</section>
+
+
+<li class="	fragment">What's the relation to previous computational accounts of <font class="sc">subjectivity</font> (<font size="6">"random contexts"</font>)? </li></ul>
