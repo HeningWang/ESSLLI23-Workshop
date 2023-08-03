@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>SCiL23: Adjective Ordering</title>
+		<title>ESSLLI23-Adjective-Quantitative</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
@@ -57,7 +57,7 @@
 							<ol>
 								<li>Theoretical Background</li>
 								<li>Motivation</li>
-								<li>Research Question</li>
+								<li>Research Aim</li>
 							</ol>
 						</li>
 						<li>Experiment: Preference Ratings
@@ -91,14 +91,16 @@
 				<section>
 					<h2 class="r-fit-text">Adjective ordering preferences</h2>
 					<ol>
-						<li>
+						<li class="fragment fade-down">
 							<ol>
 								<li type="a"><b>big white bear</b></li>
-								<li type="a"><font color="#A1A1A1">white big bear</font></li>
-								<img data-src="big_white_bear.jpeg" height="150" />
+								<li type="a" class="fragment fade-down"><font color="#A1A1A1">white big bear</font></li>
+								
 							</ol>
+							
 
 						</li>
+						<img data-src="big_white_bear.jpeg" height="150" />
 					</ol>
 					<ul>
 						<li class="fragment fade-left">Robust across languages (e.g. Sproat, 1991)</li>
@@ -156,9 +158,9 @@
 								expressions are produced <font class="earl"><b>earlier in the linear sequence</b></font>
 								to maximize informativity. 
 							</li>
+							<li class="fragment">Adjectives have maximal discriminatory strength in a given context if they single out a referent perfectly.</li>
 							<li class="fragment"> It can be defined as $\frac{1}{|[\![w]\!]^c|}$ (<font size="5">cf. Frank &amp; Goodman, 2012</font>) or,
 								more generally, $P(r|w; c)$</li>
-							<li class="fragment"> Moreover, more discriminatory adjectives are considered being more salient and accessible in a given context. </li>
 						</ul> 
 					</section>
 				</section>
@@ -166,7 +168,8 @@
 					<h2 class="r-fit-text">Comparing the two hypotheses</h2>
 					<ul>
 						<li>Both are based on <font color="#32a892">efficient communication.</font></li>
-						<li>Both assume <em>early</em> use of informative expressions.</li>	
+						<li>Both assume <em>early</em> use of informative expressions.</li>
+						<li>Both have empirical supports.</li>	
 					</ul>
 					<h3 class="fragment fade-up"> However...
 				</section>
@@ -210,35 +213,12 @@
 					<ul>
 						<li style="color: #808080">Both are based on efficient communication.</li>
 						<li style="color: #808080;">Both assume <em>early</em> use of informative expressions.</li>
+						<li style="color: #808080;">Both have empirical supports.</li>	
 						<li>Due to different perspectives (<font size="6">listener vs. speaker</font>) <em>early</em> means different things
 							(<font size="6"><font class="hear">close to</font> vs. <font class="earl">far from</font>
 							noun in prenominal modification</font>).</li>	
 					</ul>
 				</section>
-				<section>
-					<h2 class="r-fit-text">Can the two perspectives be combined?</h2>
-					<ul>
-						<li>
-							<font class="sc"><b>discriminatory strength</b></font> was not tested in the presence of subjectivity gradients.
-						</li>
-						<li>
-							<font class="sc"><b>Subjectivity</b></font> was not tested in a referential task.
-						</li>
-						<li>
-							Predictions of <font class="sc"><b>subjectivity</b></font> regarding choice of referring expressions are indirect:
-							<ul>
-								<li><font size="5">Some instances of inefficient communication may suffice
-									to drive conventionalization.</font></li>
-								<li><font size="5">Such instances my be restricted to certain readings of multi-adjective sequences, involving
-									sequentially intersective context updates (cf. Franke et al. 2019). </font></li>
-								</ul>
-						</li>
-						<li>
-							Nevertheless, <font class="sc"><b>subjectivity</b></font> would be challenged by 'opposite
-							adaptation' in an referential task
-						</li>
-					</ul>							 
-				</section>	
 				<section>
 					<h3>Main empirical question</h3>
 					<p>What happens if the two hypotheses stand in direct <font size="8";><strong>conflict</strong></font> in referential visual context?</p>
@@ -258,6 +238,26 @@
 						</li>
 					</ol>
 				</section>
+
+				<section>
+					<h2 class="r-fit-text">Can the two perspectives be combined?</h2>
+					<ul>
+						<li>
+							<font class="sc"><b>discriminatory strength</b></font> was not tested in the presence of subjectivity gradients.
+						</li>
+						<li>
+							<font class="sc"><b>Subjectivity</b></font> was not tested in a referential task.
+						</li>
+						<li>
+							Explanations for <font class="sc"><b>subjectivity</b></font> regarding efficiency are simulations based on referential communication.
+						</li>
+						<li>
+							Unclear if <font class="sc"><b>subjectivity</b></font> would be challenged by 'opposite
+							adaptation' with referential task of behavioral experiments.
+						</li>
+					</ul>							 
+				</section>	
+
 				<section>
 					<h1>Experiment</h1>
 				</section>
@@ -436,8 +436,8 @@
 							<ul style="font-size: 28px;">
 								<li class="fragment">Literal listener infers the likelihood of an intended referent $r$ given utterances $u$: 
 								<ul class="fragment">	
-									<li class="fragment"> by applying the literal meaning of $u$ on $r$, $[\![u]\!](r)$ </li>
-									<li class="fragment"> by combining prior expectations about $r$ P(r)</li>	
+									<li class="fragment"> by applying the literal meaning of $u$ on $r$: $[\![u]\!](r)$ </li>
+									<li class="fragment"> by combining prior expectations about $r$: $P(r)$</li>	
 								</ul>
 								<p class="fragment"> $L_0(r|u) \propto [\![u]\!](r) \cdot P(r)$</p>
 								</li>
@@ -447,9 +447,9 @@
 							<ul style="font-size: 28px;">
 								<li class="fragment">Pragmatic speaker infers the likelihood of an intended utterance $u$ given referents $r$: 
 								<ul class="fragment">	
-									<li class="fragment"> by maximumly reasoning about the literal speaker: $\log L_0(r|u)$ </li>
-									<li class="fragment"> by minimumly combining cost of producing an utterance $u$: $C(u)$</li>
-									<li class="fragment"> by utilizing soft-max function and rationality parameter $\alpha$ </li>		
+									<li class="fragment"> by maximizing informativity: $\log L_0(r|u)$ </li>
+									<li class="fragment"> by minimizing production cost: $C(u)$</li>
+									<li class="fragment"> governed by rationality parameter: $\alpha$ </li>		
 								</ul>
 								
 								</li>
@@ -459,19 +459,42 @@
 					<p class="fragment" style="font-size: 28px;"> $S_1(u|r) \propto \exp(\alpha \cdot (\log L_0(r|u) - C(u)))$</p>
 				</section>
 				<section>
-					<h2 class="r-fit-text">Limitation of applying standard RSA on our empircal data and some previous models</h2>
+					<h2 class="r-fit-text">Limitation of applying RSA to our empircal data</h2>
+					<h6> and some previous models</h6>
 					<ul style="font-size: 30px;">
 						<li class="fragment">Insensitive to <font class="highlight">overinformativeness</font> (e.g. in size-relevant context)</li>
 							<span class="fragment"> If two utterances are both true, speaker will always prefer the shorter one due to the cost term</span></br>
-							<span class="fragment">$\Rightarrow$ Calls for a continous semantic (cf. Degen et al. 2020)</span>
+							<span class="fragment">$\Rightarrow$ a continous semantic (cf. Degen et al. 2020)</span>
 							<li class="fragment">Insensitive to <font class="highlight">order</font></li>
-							<span class="fragment"> If two utterances are both true (i.e. $[\![u_{A}]\!](r) = [\![u_{B}]\!](r)$), their order in computation does not matter due to the law of commutativity</span></br>
-							<span class="fragment">$\Rightarrow$ Calls for sequential context update & context-dependet semantics (<font size="5"> cf. Simonic, 2018; Scontras et al., 2019;
+							<span class="fragment"> Their order in computation does not matter due to the law of commutativity (i.e. $[\![u_{A}]\!](r) \cdot [\![u_{B}]\!](r)  = [\![u_{B}]\!](r) \cdot [\![u_{A}]\!](r)$)</span></br>
+							<span class="fragment">$\Rightarrow$ sequential context update & context-dependent semantics (<font size="5"> cf. Simonic, 2018; Scontras et al., 2019;
 								Franke et al., 2019</font>) </span>
 							<li class="fragment">Insensitive to <font class="highlight"> unfinished, word-level interpretation</font></li>
-							<span class="fragment"> Both speaker and listener are based on a finished, utterance-level lexicon.</span></br>
-							<span class="fragment">$\Rightarrow$ Calls for incrementality (<font size="5"> cf. Cohn-Gordon et al., 2019; Waldon &amp; Degen, 2021; Yu, Waldon &amp; Degen, 2023</font>) </span>
+							<span class="fragment"> Both speaker and listener are based on completed utterances.</span></br>
+							<span class="fragment">$\Rightarrow$ Incrementality (<font size="5"> cf. Cohn-Gordon et al., 2019; Waldon &amp; Degen, 2021; Yu, Waldon &amp; Degen, 2023</font>) </span>
 					</ul>
+				</section>
+				<section>
+					<h2 class="r-fit-text">Meaning functions</h1>
+					<p>For color adjectives:</p>
+					\[\begin{aligned}
+					[\![blue]\!] = \lambda x. \begin{cases}
+					\epsilon& \text{if x is blue},\\
+					1 - \epsilon& \text{if x is not blue}
+					\end{cases}
+  					\end{aligned} \]
+					<p style="font-size: 0.4em;">where $\epsilon$ relates to the model parameter: $color\_semvalue$ (see below)</p>					
+				</section>
+				<section>
+					<h2 class="r-fit-text">Meaning functions</h1>
+					<p style="font-size: 0.8em;" class="fragment fade-left">For size adjectives: $k$%-semantics (Schmidt et al. 2009, Cremers et al. 2022)</p>
+					<p style="font-size: 0.8em;" class="fragment fade-left">Tall iff its height exceeds that <b>threshold</b> of $k$% of the objects in the context $supp$</p>
+					<div style="font-size: 0.6em;" class="fragment fade-left">
+						\[\begin{aligned}
+						[\![big]\!]^{supp} = \lambda x. size(x) > max(supp) - k * (max(supp) - min(supp))
+						\end{aligned} \]
+					</div>	
+					<p style="font-size: 0.8em;" class="fragment fade-left">Deviation from the ground truth: <b>"Perceptual Blur"</b> according to the Weber-Fechner ($wf$) law <font size="4">(similar as implemented in van Tiel et al. 2021)</font></p>		
 				</section>
 
 
@@ -525,7 +548,7 @@
 				</section>
 				<section data-auto-animate>
 					<p>$S(w_1,i = 1)$</p> 
-					<p>where word $w$ comes from probablistic language models, here a simple case: </p>
+					<p>where word $w$ comes from an extremely simple grammar: </p>
 					<p>$B \rightarrow aA$</p>
 					<p>$A \rightarrow bB$</p>
 					<p>$A \rightarrow \empty$</p>
@@ -552,23 +575,23 @@
 						<p>$L(w_1,i = 2 - 1 = 1)$</p>
 					</section>
 					<section data-auto-animate>
-						<p>$L(w_1,i= 1) (w_1,i = 1) \propto [\![w_1]\!]^{supp}(r) \cdot P(w_1)$</p>
+						<p class="r-fit-text">$L(w_1,i= 1) \propto [\![w_1]\!]^{supp}(r) \cdot P(w_1)$</p>
 					</section>
 					<section data-auto-animate>
 						<p>$L(w_2 \; w_1,i= 1 + 1 = 2)$</p>
 					</section>
 					<section data-auto-animate>
-						<p class="r-fit-text">$L(w_2 \; w_1,i= 2) \propto [\![w_1]\!]^{supp(L_2(w_1,i= 1))}(r) \cdot L(w_1,i= 1)$ </p>
+						<p class="r-fit-text">$L(w_2 \; w_1,i= 2) \propto [\![w_1]\!]^{supp(L(w_1,i= 1))}(r) \cdot L(w_1,i= 1)$ </p>
 					</section>
 				</section>
 				<section data-auto-animate>
-					<p class="r-fit-text">$S(w_2 \; w_1,i = 2) \propto \exp(\alpha \cdot (\log L(w_2 \; w_1,i= 2) - C(S(w_1,i = 1))))$</p>
+					<p class="r-fit-text">$S(w_2 \; w_1,i = 2) \propto \exp(\alpha \cdot (\log L(w_2 \; w_1,i= 2) - S(w_1,i = 1)))$</p>
 					<p ><font size="3"> Notice $C(w)$ and $P(w)$ are interchangeable (for proof, see Scontras et al. 2021, Appendix III)</font></p>
 				</section>
 				
 				<section>
 					<section>
-						<h2>Generalisation for fully incrementality</h2>
+						<h2>Generalisation for full incrementality</h2>
 						<img data-src="inc_model_corrected.png" width="100%" />
 					</section>
 					<section>
@@ -628,36 +651,14 @@
 				<section>
 					<h2>Discussion</h2>
 					<ul>
-						<li class="	fragment">Qualitative effects are captured with biased incremental speaker</li>	
+						<li class="	fragment">Qualitative effects are more or less captured with biased incremental speaker, but there are still some deviances.</li>	
+						<span class="fragment">$\Rightarrow$ Can deviances be overcome? </span><br/>
 						<span class="fragment">$\Rightarrow$ Is incremental listener not needed?</span><br/>
-						<li class="fragment"> <b> We need quantitative analysis to address this question! </b> </li>
+						<li class="fragment"> <b> We apply quantitative analysis to address these questions! </b> </li>
 					</ul>						
 				</section>
 				<section>
 					<h1>Model Implementation</h1>					
-				</section>
-				<section>
-					<h2 class="r-fit-text">Meaning functions</h1>
-					<p>For color adjectives:</p>
-					\[\begin{aligned}
-					[\![blue]\!] = \lambda x. \begin{cases}
-					\epsilon& \text{if x is blue},\\
-					1 - \epsilon& \text{if x is not blue}
-					\end{cases}
-  					\end{aligned} \]
-					<p>where $\epsilon$ relates to the model parameter: color_semvalue$ </p>					
-				</section>
-				<section>
-					<h2 class="r-fit-text">Meaning functions</h1>
-					<p style="font-size: 0.8em;" class="fragment fade-left">For size adjectives: $k$%-semantics (Schmidt et al. 2009, Cremers et al. 2022)</p>
-					<p style="font-size: 0.8em;" class="fragment fade-left">Tall iff its height exceeds that <b>threshold</b> of $k$% of the objects in the context $supp$</p>
-					<div style="font-size: 0.6em;" class="fragment fade-left">
-						\[\begin{aligned}
-						[\![big]\!]^{supp} = \lambda x. size(x) > max(supp) - k * (max(supp) - min(supp))
-						\end{aligned} \]
-					</div>	
-					<p style="font-size: 0.8em;" class="fragment fade-left">Deviation from the ground truth: <b>"Perceptual Blur"</b> according to the Weber-Fechner ($wf$) law <font size="4">(similar as implemented in van Tiel et al. 2021)</font></p>
-									
 				</section>
 				<section>
 					<h3>Model specifications</h2>
@@ -693,54 +694,20 @@
 				</section>
 				<section>
 					<h3>Inference</h2>
-					<ul>We use NUTS sampler (numpyro, Phan et al. 2019, Bingham et al. 2019) to perform MCMC inference:
+					<ul>We use No U-Turn Sampler (NUTS) <font size="6">(numpyro 0.12.1, Phan et al. 2019, Bingham et al. 2019)</font> to perform MCMC inference:
 						<li class="fragment fade-left">
 							Warum up size: 5000
 						</li>
 						<li class="fragment fade-left">
 							Sample size: 30000
 						</li>
-						<li class="fragment fade-left">
+						<!-- <li class="fragment fade-left">
 							In total, $N = 14$ models were trained. (with Avg. runtime of 1.5 hours per model on a single A100)
-						</li>
+						</li> -->
 					</ul>
 				</section>
 				<section>
-					<h3>Model variants</h2>
-					<ul style="font-size: 26px;">We use a Grid-Search like method to explore model variants:
-						<ul> <b>Search space:</b>
-							<li class="fragment fade-left">
-								<ul> <b>Speaker:</b>
-									<li>incremental</li>
-									<li>global</li>
-								</ul>
-							</li>
-							<li class="fragment fade-left">
-								<ul> <b>Threshold methods of size Adj:</b>
-									<li>context dependent (sampling based)</li>
-									<li>context-independent (support based)</li>
-								</ul>
-							</li>
-							<li class="fragment fade-left">
-								<ul> <b>Sample distribution:</b>
-									<li>$TruncatedNormal$</li>
-									<li>$Beta$</li>
-								</ul>
-							</li>
-							<li class="fragment fade-left">
-								<ul> <b>Link function:</b>
-									<li>logit</li>
-									<li>logistic</li>
-									<li>linear</li>
-									<li>identity</li>
-								</ul>
-							</li>
-						</ul>
-					</ul>
-					
-				</section>
-				<section>
-					<h2>Results: Good model fit</h2>
+					<h2>Results: effects captured</h2>
 					<div style="display: flex; justify-content: space-between;" >
 						<div style="flex: 1; text-align: center;">
 							<img data-src="empirical_data.png" width="90%" />
@@ -779,7 +746,40 @@
 						</div>
 					</section>
 				</section>
-				
+				<section>
+					<h3>Model variants</h2>
+					<ul style="font-size: 26px;">We use a Grid-Search like method to explore model variants:
+						<ul> <b>Search space:</b>
+							<li class="fragment fade-left">
+								<ul> <b>Speaker:</b>
+									<li>incremental</li>
+									<li>global</li>
+								</ul>
+							</li>
+							<li class="fragment fade-left">
+								<ul> <b>Threshold methods of size Adj:</b>
+									<li>context dependent (sampling based)</li>
+									<li>context-independent (support based)</li>
+								</ul>
+							</li>
+							<li class="fragment fade-left">
+								<ul> <b>Sample distribution:</b>
+									<li>$TruncatedNormal$</li>
+									<li>$Beta$</li>
+								</ul>
+							</li>
+							<li class="fragment fade-left">
+								<ul> <b>Link function:</b>
+									<li>logit</li>
+									<li>logistic</li>
+									<li>linear</li>
+									<li>identity</li>
+								</ul>
+							</li>
+						</ul>
+					</ul>
+					
+				</section>
 				
 				<section>
 					<section>
@@ -787,11 +787,11 @@
 						<div style="display: flex; justify-content: space-between;" >
 							<div style="flex: 1; text-align: center;">
 								<img data-src="02_mean_predictions_plot.png" width="80%" />
-								<ul><li><font size="5">Incremental speaker with a context-dependent size semantic</font></li></ul>
+								<ul><li><font size="5">Incremental speaker</font></li></ul>
 							</div>
 							<div style="flex: 1; text-align: center;">
 								<img data-src="01_predictions_use.png" width="80%" />
-								<ul><li><font size="5"> Non-incremental speaker with a context-independent size semantic</font></li></ul>
+								<ul><li><font size="5"> Non-incremental speaker</font></li></ul>
 							</div>
 						</div>
 						<span><b>
@@ -925,9 +925,9 @@
 					<section data-auto-animate>
 					<h2>Discussion</h2>
 					<ul style="font-size: 30px;">
-						<li class="	fragment"><b>Incremental speaker model based on context dependent size semantics</b> provides the best model fit for aggregated means.</li>
+						<li class="	fragment"><b>Incremental speaker model</b> can capture effects</li>
 						<li class="	fragment">Unlike qualitative results, we observe effects from <font class="hear">listener</font> perspective <b>contrary</b> to empirical data. </li>
-						<span class="fragment"> $\Rightarrow$ However, this is indeed expected from <b>theory predicitons and experimental design</b>.</span>
+						<span class="fragment"> $\Rightarrow$ expected from <b>theory predicitons and experimental design</b>.</span>
 						<li class="	fragment">$TruncatedNormal$ distribution provides the <b>right range</b>, but does not align with the pattern of empircal data. </li>
 						<li class="fragment"> $Beta$ distribution may better describe the <b>true underlying distribution</b> of empirical data, but does not provide the right range. </li>
 						<li class="	fragment"><b>Minor</b> differences exist among various link functions.</li>	
@@ -948,13 +948,13 @@
 									<b>Both</b> <font class="sc">Subjectivity</font> and <font class="sc">Discriminatory strength</font> contribute to adjective ordering preference as stated in literature.
 								</li>
 								<li class="	fragment">
-									A <b>complex</b> interaction effect necessitates further explanations beyond just relying on communication efficiency, but also some other Psycholinguistic factors like salience or availability.
+									A <b>complex</b> interaction effect necessitates further explanations beyond just relying on communication efficiency, but also some other psycholinguistic factors like salience or availability.
 								</li>
 							
 					</ul>
 					<ul style="font-size: 28px;" class="	fragment"> We also presented <b>a fully incremental RSA model</b>, and implemented it for quantitative analysis on our empirical data, which reveals: 
-						<li class="	fragment"><b>Incremental speaker with context-dependent size semantic</b> can capture aggregated means <b>very well</b>.</li>
-						<li class="	fragment"><b>Global speaker with context-independent size semantics</b> predicts effects from <font class="hear">listener</font> perspective <b>contrary</b> to empirical data, but in line with <b>a evolutional, stability based explanation</b> for <font class="first">subjective-first</font> ordering. (cf. Scontras et al. 2019, Franke et al. 2019)</li>
+						<li class="	fragment"><b>Incremental speaker</b> can capture aggregated means.</li>
+						<li class="	fragment"><b>Global speaker</b> predicts effects from <font class="hear">listener</font> perspective <b>contrary</b> to empirical data, but in line with <b>subjectivity</b>.</li>
 					</ul>
 				</ul>						
 				</section>	
@@ -972,7 +972,7 @@
 							</div>
 						</div>
 						<ul>
-							Provide better understanding of:
+							To better understand:
 							<li class="	fragment">Interaction effect</li>
 							<li class="	fragment">Overinformativeness</li>	
 							<span class="fragment">Without explicit link function </span>
@@ -994,15 +994,14 @@
 					<ul style="font-size: 30px;">
 						<li class="fragment">We want to build a hierarchical model structure to incorporate random effects.</li>
 						<li class="fragment">We aim to generate random contexts, similar to those used in previous simulation-based accounts of subjectivity. Our goal is to further investigate how sequential context update in our model affect the listener's perspective.</li>
-						<li class="fragment">We aim to model data from a free production task using the silimar model structure.</li>
+						<li class="fragment">We aim to model data from a free production task using the same core model.</li>
 						<li class="fragment">We want to take steps towards a general model of interpretation based on truly incremental semantics (e.g. Bott &amp; Sternefeld, 2017).
 					</ul>
 				</section>
 				<section data-auto-animate>
 					<h3 class="r-fit-text">Open questions</h3>
 					<ul style="font-size: 30px;">
-						<li class="	fragment">Given the complex data pattern, to which extend can we derieve evolutional conventionalization from efficieny in referential communication?</li>
-						<li class="	fragment">Are gradable dimension adjectives useful because they communicate <b>extreme</b> values?</li>
+						<li class="	fragment">Are gradable dimension adjectives useful in referential communication because they communicate <b>extreme</b> values?</li>
 				</section>
 			    <section data-markdown>
 					## Thank you!
